@@ -1,6 +1,8 @@
 package br.com.bandtec.bora.model.entity;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,13 +41,12 @@ public class Evento {
 	private Categoria categoria;
 
 	@NotEmpty
-	@Column(name = "data_hora_inicio")
+	@Column(name = "hora_inicio")
 	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
-	private LocalDate dataHoraInicio;
+	private Time horaInicio;
 
-	@Column(name = "data_hora_fim")
-	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
-	private LocalDate dataHoraFim;
+	@Column(name = "hora_fim")
+	private Time horaFim;
 
 	@NotEmpty
 	private String endereco;
@@ -58,11 +59,11 @@ public class Evento {
 	}
 
 	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty Categoria categoria,
-			@NotEmpty LocalDate dataHoraInicio, @NotEmpty String endereco, Usuario organizador) {
+			@NotEmpty Time horaInicio, @NotEmpty String endereco, Usuario organizador) {
 		this.idEvento = idEvento;
 		this.nome = nome;
 		this.categoria = categoria;
-		this.dataHoraInicio = dataHoraInicio;
+		this.horaInicio = horaInicio;
 		this.endereco = endereco;
 		this.organizador = organizador;
 	}
@@ -99,20 +100,20 @@ public class Evento {
 		this.categoria = categoria;
 	}
 
-	public LocalDate getDataHoraInicio() {
-		return dataHoraInicio;
+	public Time getHoraInicio() {
+		return horaInicio;
 	}
 
-	public void setDataHoraInicio(LocalDate dataHoraInicio) {
-		this.dataHoraInicio = dataHoraInicio;
+	public void setHoraInicio(Time horaInicio) {
+		this.horaInicio = horaInicio;
 	}
 
-	public LocalDate getDataHoraFim() {
-		return dataHoraFim;
+	public Time getHoraFim() {
+		return horaFim;
 	}
 
-	public void setDataHoraFim(LocalDate dataHoraFim) {
-		this.dataHoraFim = dataHoraFim;
+	public void setHoraFim(Time horaFim) {
+		this.horaFim = horaFim;
 	}
 
 	public String getEndereco() {

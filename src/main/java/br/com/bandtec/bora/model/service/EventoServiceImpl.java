@@ -29,7 +29,7 @@ public class EventoServiceImpl implements EventoService {
 		evento.setNome(evento.getNome());
 		evento.setEndereco(evento.getEndereco());
 		evento.setCategoria(evento.getCategoria());
-		evento.setDataHoraInicio(evento.getDataHoraInicio());
+		evento.setHoraInicio(evento.getHoraInicio());
 		return eventoRepositorio.save(evento);
 	}
 
@@ -46,7 +46,6 @@ public class EventoServiceImpl implements EventoService {
 		return eventoRepositorio.findAll();
 	}
 
-
 	@Transactional
 	@Override
 	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
@@ -54,9 +53,9 @@ public class EventoServiceImpl implements EventoService {
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		Evento evento = new Evento();
 		usuario.setIdUsuario(cadastrarEvento.getUsuario().getIdUsuario());
-		
+
 		evento.setCategoria(cadastrarEvento.getEvento().getCategoria());
-		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
+		evento.setHoraInicio(cadastrarEvento.getEvento().getHoraInicio());
 		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
 		evento.setNome(cadastrarEvento.getEvento().getNome());
 		evento.setOrganizador(usuario);
@@ -64,7 +63,7 @@ public class EventoServiceImpl implements EventoService {
 		usuarioEventoRepositorio.save(usuarioEvento);
 		usuarioEvento.setEvento(evento);
 		usuarioEvento.setUsuario(usuario);
-		
+
 	}
 
 }
