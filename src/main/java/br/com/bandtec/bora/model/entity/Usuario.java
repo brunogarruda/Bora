@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,8 +30,12 @@ public class Usuario implements UserDetails {
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
+	@NotNull
+	@Size(min = 2, message = "Minino duas letras")
 	private String nome;
 
+	@NotNull
+	@Size(min = 2, message = "Minino duas letras")
 	private String apelido;
 
 	private String celular;
@@ -57,53 +64,6 @@ public class Usuario implements UserDetails {
 		this.idUsuario = idUsuario;
 	}
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getApelido() {
-		return apelido;
-	}
-
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
-	}
-
-	public String getCelular() {
-		return celular;
-	}
-
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public List<Evento> getEventosCriado() {
-		return eventosCriado;
-	}
-
-	public List<UsuarioEvento> getTodosEventos() {
-		return todosEventos;
-	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
