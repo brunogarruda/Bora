@@ -17,7 +17,7 @@ public class UsuarioService {
 	private UsuarioRepositorio usuarioRepositorio;
 
 	public List<Usuario> buscarTodosUsuarios() {
-		return usuarioRepositorio.findAll();
+		return (List<Usuario>) usuarioRepositorio.findAll();
 	}
 
 	public Usuario cadastrarUsuario(Usuario usuario) {

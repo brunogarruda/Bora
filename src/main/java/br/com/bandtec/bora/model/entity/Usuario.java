@@ -1,6 +1,5 @@
 package br.com.bandtec.bora.model.entity;
 
-
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,17 +13,32 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-@Table(name = "tbd_usuario")
-public class Usuario{
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-	private static final long serialVersionUID = 1L;
+@Entity
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "tbd_usuario")
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
+	@EqualsAndHashCode.Include
 	private Long idUsuario;
 
 	@NotNull
@@ -48,15 +62,24 @@ public class Usuario{
 
 	@NotEmpty
 	@Size(min = 5, message = "Minino de cinco caracteres")
+	@JsonIgnore
 	private String senha;
+
+	@NotEmpty
+	private String role = "USUARIO";
 
 	@OneToMany(mappedBy = "organizador")
 	private List<Evento> eventosCriado;
 
-	public Usuario() {
-	}
-
 	public Usuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+
+	public Usuario(@NotNull Usuario usuario) {
+		this.idUsuario = usuario.getIdUsuario();
+		this.apelido = usuario.getApelido();
+		this.senha = usuario.getSenha();
+		this.role = usuario.getRole();
+	}
+
 }
