@@ -1,23 +1,9 @@
-package br.com.bandtec.bora.model.entity;
+package br.com.bandtec.bora.core.model;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.util.Date;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.sql.Time;
 
 @Entity
 @Table(name = "tbd_evento")
@@ -25,7 +11,7 @@ public class Evento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_evento")
+	@Column n(name = "id_evento")
 	private Long idEvento;
 
 	@NotEmpty
@@ -42,11 +28,10 @@ public class Evento {
 
 	@NotEmpty
 	@Column(name = "hora_inicio")
-	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
-	private Time horaInicio;
+	private String horaInicio;
 
 	@Column(name = "hora_fim")
-	private Time horaFim;
+	private String horaFim;
 
 	@NotEmpty
 	private String endereco;
@@ -59,7 +44,7 @@ public class Evento {
 	}
 
 	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty Categoria categoria,
-			@NotEmpty Time horaInicio, @NotEmpty String endereco, Usuario organizador) {
+                  @NotEmpty Time horaInicio, @NotEmpty String endereco, Usuario organizador) {
 		this.idEvento = idEvento;
 		this.nome = nome;
 		this.categoria = categoria;

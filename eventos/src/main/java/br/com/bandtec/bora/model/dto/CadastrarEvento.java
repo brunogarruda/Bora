@@ -1,7 +1,5 @@
 package br.com.bandtec.bora.model.dto;
 
-import br.com.bandtec.bora.model.entity.Evento;
-import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.Categoria;;
 
 public class CadastrarEvento {

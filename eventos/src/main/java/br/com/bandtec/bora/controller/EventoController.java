@@ -15,12 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bandtec.bora.model.dto.CadastrarEvento;
-import br.com.bandtec.bora.model.entity.Evento;
-import br.com.bandtec.bora.model.entity.Usuario;
-import br.com.bandtec.bora.model.entity.UsuarioEvento;
-import br.com.bandtec.bora.model.excecoes.DomainException;
 import br.com.bandtec.bora.model.service.EventoService;
-import br.com.bandtec.bora.model.service.UsuarioService;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
 @RestController

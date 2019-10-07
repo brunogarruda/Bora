@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.bandtec.bora.model.dto.CadastrarEvento;
-import br.com.bandtec.bora.model.entity.Evento;
-import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
-import br.com.bandtec.bora.repository.EventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
 @Service
