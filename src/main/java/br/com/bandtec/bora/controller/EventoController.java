@@ -24,7 +24,7 @@ import br.com.bandtec.bora.model.service.UsuarioService;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/eventos")
 public class EventoController {
 
 	@Autowired
@@ -33,7 +33,7 @@ public class EventoController {
 	@Autowired
 	private UsuarioEventoRepositorio repositorio;
 
-	@PostMapping("/eventos")
+	@PostMapping
 	public ResponseEntity<CadastrarEvento> evento(@RequestBody CadastrarEvento cadastrarEvento) {
 //		eventoService.cadastrarEvento(cadastrarEvento);
 		eventoService.cadastrarEvento(cadastrarEvento);
@@ -59,10 +59,10 @@ public class EventoController {
 
 	}
 
-	@GetMapping("/eventos/{usuario}")
-	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
-		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
-	}
+//	@GetMapping("/eventos/{usuario}")
+//	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
+//		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
+//	}
 
 	@GetMapping("/eventos")
 	public List<Evento> buscarTodosEventos(Evento evento) {

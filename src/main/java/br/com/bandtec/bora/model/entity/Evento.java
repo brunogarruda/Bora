@@ -1,5 +1,9 @@
 package br.com.bandtec.bora.model.entity;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tbd_evento")
@@ -20,12 +28,27 @@ public class Evento {
 	@Column(name = "id_evento")
 	private Long idEvento;
 
+	@NotEmpty
+	@Size(min = 2)
+	@Column(name = "nome_evento")
 	private String nome;
 
-	private String categoria;
+	@Size(max = 255)
+	private String descricao;
 
-	private String dataHora;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@NotEmpty
+	private Categoria categoria;
 
+	@NotEmpty
+	@Column(name = "hora_inicio")
+	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
+	private Time horaInicio;
+
+	@Column(name = "hora_fim")
+	private Time horaFim;
+
+	@NotEmpty
 	private String endereco;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
@@ -35,10 +58,12 @@ public class Evento {
 	public Evento() {
 	}
 
-	public Evento(String nome, String categoria, String dataHora, String endereco, Usuario organizador) {
+	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty Categoria categoria,
+			@NotEmpty Time horaInicio, @NotEmpty String endereco, Usuario organizador) {
+		this.idEvento = idEvento;
 		this.nome = nome;
 		this.categoria = categoria;
-		this.dataHora = dataHora;
+		this.horaInicio = horaInicio;
 		this.endereco = endereco;
 		this.organizador = organizador;
 	}
@@ -59,20 +84,36 @@ public class Evento {
 		this.nome = nome;
 	}
 
-	public String getCategoria() {
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
-	public String getDataHora() {
-		return dataHora;
+	public Time getHoraInicio() {
+		return horaInicio;
 	}
 
-	public void setDataHora(String dataHora) {
-		this.dataHora = dataHora;
+	public void setHoraInicio(Time horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public Time getHoraFim() {
+		return horaFim;
+	}
+
+	public void setHoraFim(Time horaFim) {
+		this.horaFim = horaFim;
 	}
 
 	public String getEndereco() {
@@ -87,8 +128,7 @@ public class Evento {
 		return organizador;
 	}
 
-	public void setUsuario(Usuario organizador) {
+	public void setOrganizador(Usuario organizador) {
 		this.organizador = organizador;
 	}
-
 }

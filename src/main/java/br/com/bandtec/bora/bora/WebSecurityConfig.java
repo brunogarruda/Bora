@@ -15,55 +15,30 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 import br.com.bandtec.bora.model.entity.Usuario;
+import br.com.bandtec.bora.model.security.jwt.JWTAuthenticationFilter;
+import br.com.bandtec.bora.model.security.jwt.JWTLoginFilter;
+
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    
-	@Autowired
-	private ImplementsUserDetailsService userDetailsService;
-	private Usuario usuario;
-	
-	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/").permitAll()
-		
-		.antMatchers(HttpMethod.GET, "/api/eventos}").permitAll()
-		.antMatchers(HttpMethod.POST, "/api/eventos").permitAll()
-		.antMatchers(HttpMethod.PUT, "/api/eventos/{idEvento}").permitAll()
-		
-		.antMatchers(HttpMethod.GET, "/api/usuarios").authenticated()
-		.antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
-		
-		
-		.anyRequest().authenticated()
-		.and().formLogin().permitAll()
-		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
-    }
-	
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.userDetailsService(userDetailsService)
-		.passwordEncoder(new BCryptPasswordEncoder());
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeRequests().antMatchers("/").permitAll().antMatchers(HttpMethod.POST, "/login")
+				.permitAll().antMatchers(HttpMethod.GET, "/eventos").permitAll().anyRequest().authenticated().and()
+				.addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
+						UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
-	
-	
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//             User.withDefaultPasswordEncoder()
-//                .username("bruno")
-//                .password("123")
-//                .roles("ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
-	
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// cria uma conta default
+		auth.inMemoryAuthentication().withUser("admin").password("password").roles("ADMIN");
+	}
+
 }

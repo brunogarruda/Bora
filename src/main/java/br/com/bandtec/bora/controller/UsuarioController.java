@@ -22,7 +22,7 @@ import br.com.bandtec.bora.model.service.UsuarioService;
 import br.com.bandtec.bora.model.service.notfound.NaoEncontreiUsuario;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
 
 	private UsuarioService service;
@@ -36,7 +36,7 @@ public class UsuarioController {
 	 * Para cadastrar um usuario
 	 */
 
-	@PostMapping("/usuarios")
+	@PostMapping()
 	public ResponseEntity<Usuario> criarUsuario(@Valid @RequestBody Usuario usuario) {
 		return ResponseEntity.ok(service.cadastrarUsuario(usuario));
 	}
@@ -45,7 +45,7 @@ public class UsuarioController {
 	 * Para buscar todos os usuarios cadastrados
 	 */
 
-	@GetMapping("/usuarios")
+	@GetMapping
 	public List<Usuario> buscarTodosUsuarios() {
 		return service.buscarTodosUsuarios();
 	}
@@ -54,7 +54,7 @@ public class UsuarioController {
 	 * Para buscar usuarios cadastrados pelo idUsuario
 	 */
 
-	@GetMapping("usuarios/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Usuario>> buscarUsuarioPeloIdUsuario(@PathVariable Long id) {
 		Optional<Usuario> buscarUsuario = service.buscarUsuarioPeloIdUsuario(id);
 
@@ -87,13 +87,12 @@ public class UsuarioController {
 //		return ResponseEntity.ok(usuarioAlterado);
 //	}
 //
+
 	/*
 	 * Deletar um usuario
+	 * 
+	 * @DeleteMapping("/{id}") public void deletarUsuario(@PathVariable(value =
+	 * "idUsuario") Long idUsuario) { usuarioService.deletarUsuario(idUsuario); }
+	 * 
 	 */
-
-	@DeleteMapping("usuarios/{idUsuario}")
-	public void deletarUsuario(@PathVariable(value = "idUsuario") Long idUsuario) {
-		usuarioService.deletarUsuario(idUsuario);
-	}
-
 }

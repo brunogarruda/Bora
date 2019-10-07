@@ -24,7 +24,7 @@ public class ImplementsUserDetailsService implements UserDetailsService{
 			throw new UsernameNotFoundException("Usuario não encontrado");
 		}
 		
-		return buscaUsuario;
+		return (UserDetails) buscaUsuario;
 	}
 
 }
