@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.bandtec.bora.model.dto.CadastrarEvento;
+import br.com.bandtec.bora.model.entity.Categoria;
 import br.com.bandtec.bora.model.entity.Evento;
+import br.com.bandtec.bora.model.entity.SubCategoria;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
+import br.com.bandtec.bora.repository.CategoriaRepositorio;
 import br.com.bandtec.bora.repository.EventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
@@ -22,6 +25,9 @@ public class EventoService {
 
 	@Autowired
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
+	
+	@Autowired
+	private CategoriaRepositorio categoriaRepositorio;
 
 	
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
@@ -43,6 +49,10 @@ public class EventoService {
 
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
+	}
+	
+	public Categoria buscarEventoPorSubCategoria(String subcategoria) {
+		return categoriaRepositorio.buscarEventoPorSubCategoria(subcategoria);
 	}
 
 

@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import br.com.bandtec.bora.model.entity.Categoria;;
+import br.com.bandtec.bora.model.entity.Categoria;
+import br.com.bandtec.bora.model.entity.Evento;;
 
 @Repository
 public interface CategoriaRepositorio extends JpaRepository<Categoria,Long>{
 	
 	List<Categoria> findAll();
+	
+	Categoria buscarEventoPorSubCategoria(String subcategoria); 
 }

@@ -37,16 +37,17 @@ public class Usuario implements UserDetails {
 	@Column(unique = true, length = 50)
 	@Size(min = 5)
 	private String apelido;
+	
+	@NotEmpty
+	private String celular;
+	
+	@NotEmpty
+	@Size(min = 5)
+	private String senha;
 
 	@Email
 	private String email;
 
-	@NotEmpty
-	private String celular;
-
-	@NotEmpty
-	@Size(min = 5)
-	private String senha;
 
 	@OneToMany(mappedBy = "organizador")
 	@JsonIgnoreProperties

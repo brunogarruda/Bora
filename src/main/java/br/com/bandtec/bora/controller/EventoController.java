@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bandtec.bora.model.dto.CadastrarEvento;
+import br.com.bandtec.bora.model.entity.Categoria;
 import br.com.bandtec.bora.model.entity.Evento;
+import br.com.bandtec.bora.model.entity.SubCategoria;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
 import br.com.bandtec.bora.model.excecoes.DomainException;
@@ -56,6 +58,11 @@ public class EventoController {
 	@GetMapping("/eventos/{usuario}")
 	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
 		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
+	}
+	
+	@GetMapping("/eventos/buscar-evento-por-subcategoria/{subcategoria}")
+	public Categoria buscarEventoPorSubCategoria(@RequestBody Categoria subcategoria) {
+		return eventoService.buscarEventoPorSubCategoria(subcategoria.getNomeCategoria());
 	}
 
 }

@@ -33,11 +33,11 @@ public class Evento {
 	
 	@NotEmpty
 	@Column(name = "data_hora_inicio")
-//	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private String dataHoraInicio;
 
 	@Column(name = "data_hora_fim")
-//	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private String dataHoraFim;
 	
 	@Size(max = 255)
