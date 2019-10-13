@@ -13,7 +13,7 @@ import br.com.bandtec.bora.model.security.jwt.JwtConfiguration;
 @EntityScan(basePackages = { "br.com.bandtec.bora.core.model" })
 @EnableJpaRepositories(basePackages = { "br.com.bandtec.bora.core.repository" })
 @EnableConfigurationProperties(value = JwtConfiguration.class)
-//@ComponentScan(basePackages = { "br.com.bandtec.bora" })
+@ComponentScan(basePackages = { "br.com.bandtec.bora" })
 public class BoraApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BoraApplication.class, args);
