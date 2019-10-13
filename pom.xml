@@ -39,7 +39,7 @@
         <!-- Dependencia Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
+            <artifactId>springfox-swagger</artifactId>
             <version>2.9.2</version>
         </dependency>
 

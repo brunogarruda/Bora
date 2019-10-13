@@ -15,16 +15,16 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
-#    properties:
-#      hibernate:
-#        dialect:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   jmx:
     enabled: false
   datasource:
-    url: jdbc:h2:file:./db/database;AUTO_SERVER=TRUE;
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/postgres
+      username: dd
+      password: ddd
 
 jwt:
   config:
