@@ -31,7 +31,38 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         }
 
         log.info("Cria autenticacao para o usuario '{}' e chama o UserDetailServiceImpl loadUserByUsername",usuario.getApelido());
+		
+		
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(usuario.getApelido(),usuario.getSenha(),emptyList());
+		
+		usernamePasswordAuthenticationToken.setDetails(usuario);
+		
 
-        return super.attemptAuthentication(request, response);
+        return authenticationManager.authenticate(usernamePasswordAuthenticationToken);
     }
+	
+	@Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) {
+        log.info("Authentication was successful for the user '{}', generating JWE token", auth.getName());
+
+        SignedJWT signedJWT = tokenCreator.createSignedJWT(auth);
+
+        String encryptedToken = tokenCreator.encryptToken(signedJWT);
+
+        log.info("Token generated successfully, adding it to the response header");
+
+        response.addHeader("Access-Control-Expose-Headers", "XSRF-TOKEN, " + jwtConfiguration.getHeader().getName());
+
+        response.addHeader(jwtConfiguration.getHeader().getName(), jwtConfiguration.getHeader().getPrefix() + encryptedToken);
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

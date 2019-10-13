@@ -1,7 +1,7 @@
 package br.com.bandtec.bora.auth.security.config;
 
 import br.com.bandtec.bora.auth.security.filter.JwtUsernameAndPasswordAuthenticationFilter;
-import com.twilio.rest.api.v2010.account.TokenCreator;
+import br.com.bandtec.bora.token
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

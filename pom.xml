@@ -29,11 +29,32 @@
 
     <dependencies>
 
+        <!-- Dependencia Swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <!-- Dependencia Swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+
+        <!-- Dependencia Spring Cloud Eureka Client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -56,17 +77,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <!-- end::security[] -->
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -87,7 +97,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.5</version> <!--$NO-MVN-MAN-VER$ -->
+            <version>2.8.5</version>
         </dependency>
 
         <!-- Dependencia Postgre -->
@@ -123,6 +133,7 @@
             <version>0.9.0</version>
         </dependency>
 
+        <!--Dependencia NIMBUS JOSE JWT-->
 
         <dependency>
             <groupId>com.nimbusds</groupId>
@@ -130,6 +141,7 @@
             <version>7.8</version>
         </dependency>
     </dependencies>
+
      <dependencyManagement>
         <dependencies>
             <dependency>

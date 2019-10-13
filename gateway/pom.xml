@@ -12,13 +12,25 @@
     <artifactId>gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gateway</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Bora Gateway API</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>br.com.bandtec.bora</groupId>
+            <artifactId>token</artifactId>
+            <version>0.2.0-BETA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com.bandtec.bora</groupId>
+            <artifactId>core</artifactId>
+            <version>0.2.0-BETA</version>
+        </dependency>
      
         <dependency>
             <groupId>org.springframework.cloud</groupId>

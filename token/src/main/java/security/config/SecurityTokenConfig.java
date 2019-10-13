@@ -2,25 +2,17 @@ package security.config;
 
 
 import br.com.bandtec.bora.core.property.JwtConfiguration;
-import com.twilio.rest.api.v2010.account.TokenCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
-    private final JwtConfiguration jwtConfiguration;
+    protected final JwtConfiguration jwtConfiguration;
 
 
     @Override
