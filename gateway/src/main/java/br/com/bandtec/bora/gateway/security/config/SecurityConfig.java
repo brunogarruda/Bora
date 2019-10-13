@@ -4,6 +4,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import br.com.bandtec.bora.token.security.config.SecurityTokenConfig;
 
 @EnableWebSecurity
-public class SecurityConfig extends SecurityT {
+public class SecurityConfig extends SecurityTokenConfig {
+    
 
 }
