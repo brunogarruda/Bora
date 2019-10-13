@@ -1,30 +1,35 @@
 package br.com.bandtec.bora.model.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import br.com.bandtec.bora.core.model.Usuario;
+import br.com.bandtec.bora.core.repository.UsuarioRepositorio;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+
 public class UsuarioService {
 
-	@Autowired
-	private UsuarioRepositorio usuarioRepositorio;
+	private final UsuarioRepositorio usuarioRepositorio;
 
-	public List<Usuario> buscarTodosUsuarios() {
-		return (List<Usuario>) usuarioRepositorio.findAll();
+	public Iterable<Usuario> buscarUsuarios(Pageable pageable) {
+		log.info("Listing all eventos");
+		return usuarioRepositorio.findAll();
 	}
 
-	public Usuario cadastrarUsuario(Usuario usuario) {
-		return usuarioRepositorio.save(usuario);
-	}
-
-	public Optional<Usuario> buscarUsuarioPeloIdUsuario(Long idUsuario) {
-		return usuarioRepositorio.findById(idUsuario);
-	}
-
-	public void deletarUsuario(Long idUsuario) {
-		usuarioRepositorio.deleteById(idUsuario);
-	}
+//	public Usuario cadastrarUsuario(Usuario usuario) {
+//		return usuarioRepositorio.save(usuario);
+//	}
+//
+//	public Optional<Usuario> buscarUsuarioPeloIdUsuario(Long idUsuario) {
+//		return usuarioRepositorio.findById(idUsuario);
+//	}
+//
+//	public void deletarUsuario(Long idUsuario) {
+//		usuarioRepositorio.deleteById(idUsuario);
+//	}
 }

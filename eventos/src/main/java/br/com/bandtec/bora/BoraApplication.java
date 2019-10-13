@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import br.com.bandtec.bora.core.property.JwtConfiguration;
 
-import br.com.bandtec.bora.model.security.jwt.JwtConfiguration;
+
 
 @SpringBootApplication
 @EntityScan(basePackages = { "br.com.bandtec.bora.core.model" })

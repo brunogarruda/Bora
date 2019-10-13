@@ -16,15 +16,14 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
   jmx:
     enabled: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-      username: dd
-      password: ddd
+     url: jdbc:h2:file:./db/database;AUTO_SERVER=TRUE
+     username: sa
+     password:
+     driver-class-name: org.h2.Driver
+     platform: h2
 
 jwt:
   config:
