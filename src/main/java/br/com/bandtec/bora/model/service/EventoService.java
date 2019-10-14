@@ -51,8 +51,8 @@ public class EventoService {
 		return eventoRepositorio.findAll();
 	}
 	
-	public Categoria buscarEventoPorSubCategoria(String subcategoria) {
-		return categoriaRepositorio.buscarEventoPorSubCategoria(subcategoria);
+	public Evento buscarEventoPorSubCategoria(String subcategoria) {
+		return eventoRepositorio.buscarEventoPorSubCategoria(subcategoria);
 	}
 
 

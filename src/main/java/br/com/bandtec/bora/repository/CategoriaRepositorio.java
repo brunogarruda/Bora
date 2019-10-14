@@ -12,5 +12,4 @@ public interface CategoriaRepositorio extends JpaRepository<Categoria,Long>{
 	
 	List<Categoria> findAll();
 	
-	Categoria buscarEventoPorSubCategoria(String subcategoria); 
 }

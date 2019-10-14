@@ -61,8 +61,8 @@ public class EventoController {
 	}
 	
 	@GetMapping("/eventos/buscar-evento-por-subcategoria/{subcategoria}")
-	public Categoria buscarEventoPorSubCategoria(@RequestBody Categoria subcategoria) {
-		return eventoService.buscarEventoPorSubCategoria(subcategoria.getNomeCategoria());
+	public Evento buscarEventoPorSubCategoria(@RequestBody SubCategoria subcategoria) {
+		return eventoService.buscarEventoPorSubCategoria(subcategoria.getNome());
 	}
 
 }
