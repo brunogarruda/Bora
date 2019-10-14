@@ -16,14 +16,25 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
-				.and().sessionManagement().sessionCreationPolicy(STATELESS).and().exceptionHandling()
-				.authenticationEntryPoint((req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED)).and()
-				.authorizeRequests().antMatchers(jwtConfiguration.getLoginUrl(), "/**/swagger-ui-html").permitAll()
-				.antMatchers(HttpMethod.GET, "/**/swagger-resources/**", "/**/webjars/springfox-swagger-ui/**",
-						"/**/v2/api-docs/**")
-				.permitAll().antMatchers("/eventos/v1/usuario/**").hasRole("USUARIO").antMatchers("/auth/usuario/**")
-				.hasAnyRole("USUARIO").anyRequest().authenticated();
+		http
+		.csrf()
+		.disable()
+		.cors()
+		.configurationSource(request -> new CorsConfiguration()
+				.applyPermitDefaultValues())
+				.and().sessionManagement()
+				.sessionCreationPolicy(STATELESS)
+				.and()
+				.exceptionHandling()
+				.authenticationEntryPoint((req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+				.and()
+				.authorizeRequests()
+				.antMatchers(jwtConfiguration.getLoginUrl(), "/**/swagger-ui-html")
+				.permitAll()
+				.antMatchers(HttpMethod.GET, "/**/swagger-resources/**", "/**/webjars/springfox-swagger-ui/**","/**/v2/api-docs/**").permitAll()
+				.antMatchers("/eventos/v1/usuario/**").hasRole("ADMIN")
+				.antMatchers("/auth/usuario/**").hasAnyRole("ADMIN","USER")
+				.anyRequest().authenticated();
 
 	}
 

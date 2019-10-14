@@ -1,5 +1,6 @@
 server:
   port: 8082
+
 eureka:
   instance:
     prefer-ip-address: true
@@ -12,18 +13,18 @@ spring:
   application:
     name: eventos
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   jmx:
     enabled: false
   datasource:
-     url: jdbc:h2:file:./db/database;AUTO_SERVER=TRUE
-     username: sa
-     password:
-     driver-class-name: org.h2.Driver
-     platform: h2
+    url: jdbc:h2:file:./eventos/db/database;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    platform: h2
 
-  jwt:
-    config:
-      type: signed
+jwt:
+  config:
+    type: signed

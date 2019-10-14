@@ -36,7 +36,7 @@ public class Usuario implements AbstractEntity{
 	@NotNull
 	@Column(nullable = false)
 	@Builder.Default
-	private String role = "USUARIO";
+	private String role = "USER";
 
 	public Usuario(@NotNull Usuario usuario) {
 		this.id = usuario.getId();

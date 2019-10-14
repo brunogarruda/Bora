@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 @RestController
-@RequestMapping("/v1/api/eventos")
+@RequestMapping("/v1/admin/eventos")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Api(value = "Endpoints para gerenciar eventos")
 public class EventoController {

@@ -15,17 +15,16 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   jmx:
     enabled: false
   datasource:
-     url: jdbc:h2:file:./db/database;AUTO_SERVER=TRUE
-     username: sa
-     password:
-     driver-class-name: org.h2.Driver
-     platform: h2
+    url: jdbc:h2:file:./auth/db/database;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    platform: h2
 
 jwt:
   config:
     type: signed
-

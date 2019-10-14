@@ -18,47 +18,49 @@ import java.text.ParseException;
 import static br.com.bandtec.bora.token.security.util.SecurityContextUtil.setSecurityContext;
 
 public class GatewayJwtTokenAuthorizationFilter extends JwtTokenAuthorizationFilter {
-    public GatewayJwtTokenAuthorizationFilter(JwtConfiguration jwtConfiguration, TokenConverter tokenConverter) {
-        super(jwtConfiguration, tokenConverter);
-    }
+	public GatewayJwtTokenAuthorizationFilter(JwtConfiguration jwtConfiguration, TokenConverter tokenConverter) {
+		super(jwtConfiguration, tokenConverter);
+	}
 
-    @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain chain) throws ServletException, IOException {
-        String header = request.getHeader(jwtConfiguration.getHeader().getName());
+	@Override
+	protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+			@NonNull FilterChain chain) throws ServletException, IOException {
+		String header = request.getHeader(jwtConfiguration.getHeader().getName());
 
-        if (header == null || !header.startsWith(jwtConfiguration.getHeader().getPrefix())) {
-            chain.doFilter(request, response);
-            return;
-        }
+		if (header == null || !header.startsWith(jwtConfiguration.getHeader().getPrefix())) {
+			chain.doFilter(request, response);
+			return;
+		}
 
-        String token = header.replace(jwtConfiguration.getHeader().getPrefix(), "").trim();
+		String token = header.replace(jwtConfiguration.getHeader().getPrefix(), "").trim();
 
-        String signedToken = null;
-        try {
-            signedToken = tokenConverter.decryptToken(token);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (JOSEException e) {
-            e.printStackTrace();
-        }
+		String signedToken = null;
+		try {
+			signedToken = tokenConverter.decryptToken(token);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (JOSEException e) {
+			e.printStackTrace();
+		}
 
-        try {
-            tokenConverter.validateTokenSignature(signedToken);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (JOSEException e) {
-            e.printStackTrace();
-        }
+		try {
+			tokenConverter.validateTokenSignature(signedToken);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (JOSEException e) {
+			e.printStackTrace();
+		}
 
-        try {
-            setSecurityContext(SignedJWT.parse(signedToken));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+		try {
+			setSecurityContext(SignedJWT.parse(signedToken));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
-        if (jwtConfiguration.getType().equalsIgnoreCase("signed"))
-            RequestContext.getCurrentContext().addZuulRequestHeader("Authorization", jwtConfiguration.getHeader().getPrefix() + signedToken);
+		if (jwtConfiguration.getType().equalsIgnoreCase("signed"))
+			RequestContext.getCurrentContext().addZuulRequestHeader("Authorization",
+					jwtConfiguration.getHeader().getPrefix() + signedToken);
 
-        chain.doFilter(request, response);
-    }
+		chain.doFilter(request, response);
+	}
 }

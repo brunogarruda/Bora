@@ -26,59 +26,61 @@ import static java.util.Collections.emptyList;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    private final AuthenticationManager authenticationManager;
-    private final JwtConfiguration jwtConfiguration;
-    private final TokenCreator tokenCreator;
+	private final AuthenticationManager authenticationManager;
+	private final JwtConfiguration jwtConfiguration;
+	private final TokenCreator tokenCreator;
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        log.info("Autenticando...");
-        Usuario usuario = null;
-        try {
-            usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+	@Override
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+			throws AuthenticationException {
+		log.info("Autenticando...");
+		Usuario usuario = null;
+		try {
+			usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        if (usuario == null) {
-            throw new UsernameNotFoundException("Nao encontrei o usuario");
-        }
+		if (usuario == null) {
+			throw new UsernameNotFoundException("Nao encontrei o usuario");
+		}
 
-        log.info("Cria autenticacao para o usuario '{}' e chama o UserDetailServiceImpl loadUserByUsername", usuario.getApelido());
+		log.info("Cria autenticacao para o usuario '{}' e chama o UserDetailServiceImpl loadUserByUsername",
+				usuario.getApelido());
 
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+				usuario.getApelido(), usuario.getSenha(), emptyList());
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(usuario.getApelido(), usuario.getSenha(), emptyList());
+		usernamePasswordAuthenticationToken.setDetails(usuario);
 
-        usernamePasswordAuthenticationToken.setDetails(usuario);
+		return authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+	}
 
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication auth) {
+		log.info("Authentication was successful for the user '{}', generating JWE token", auth.getName());
 
-        return authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-    }
+		SignedJWT signedJWT = null;
+		try {
+			signedJWT = tokenCreator.createSignedJWT(auth);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 
-    @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) {
-        log.info("Authentication was successful for the user '{}', generating JWE token", auth.getName());
+		String encryptedToken = null;
+		try {
+			encryptedToken = tokenCreator.encryptToken(signedJWT);
+		} catch (JOSEException e) {
+			e.printStackTrace();
+		}
 
-        SignedJWT signedJWT = null;
-        try {
-            signedJWT = tokenCreator.createSignedJWT(auth);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+		log.info("Token generated successfully, adding it to the response header");
 
-        String encryptedToken = null;
-        try {
-            encryptedToken = tokenCreator.encryptToken(signedJWT);
-        } catch (JOSEException e) {
-            e.printStackTrace();
-        }
+		response.addHeader("Access-Control-Expose-Headers", "XSRF-TOKEN, " + jwtConfiguration.getHeader().getName());
 
-        log.info("Token generated successfully, adding it to the response header");
-
-        response.addHeader("Access-Control-Expose-Headers", "XSRF-TOKEN, " + jwtConfiguration.getHeader().getName());
-
-        response.addHeader(jwtConfiguration.getHeader().getName(), jwtConfiguration.getHeader().getPrefix() + encryptedToken);
-    }
-
+		response.addHeader(jwtConfiguration.getHeader().getName(),
+				jwtConfiguration.getHeader().getPrefix() + encryptedToken);
+	}
 
 }

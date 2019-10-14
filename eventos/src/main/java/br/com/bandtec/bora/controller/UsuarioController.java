@@ -14,7 +14,7 @@ import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/v1/api/usuarios")
+@RequestMapping("/v1/admin/usuarios")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Api(value = "Endpoints para gerenciar usuarios")
 public class UsuarioController {
