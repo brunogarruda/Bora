@@ -3,9 +3,9 @@ package br.com.bandtec.bora.auth.security.filter;
 import br.com.bandtec.bora.core.property.JwtConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.bandtec.bora.core.model.Usuario;
-import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,12 +15,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import br.com.bandtec.bora.token.security.token.TokenCreator;
-
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import static java.util.Collections.emptyList;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -31,15 +28,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 	private final TokenCreator tokenCreator;
 
 	@Override
+	@SneakyThrows
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		log.info("Autenticando...");
-		Usuario usuario = null;
-		try {
-			usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Usuario usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
 
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Nao encontrei o usuario");
@@ -57,23 +50,14 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 	}
 
 	@Override
+	@SneakyThrows
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication auth) {
 		log.info("Authentication was successful for the user '{}', generating JWE token", auth.getName());
 
-		SignedJWT signedJWT = null;
-		try {
-			signedJWT = tokenCreator.createSignedJWT(auth);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
+		SignedJWT signedJWT = tokenCreator.createSignedJWT(auth);
 
-		String encryptedToken = null;
-		try {
-			encryptedToken = tokenCreator.encryptToken(signedJWT);
-		} catch (JOSEException e) {
-			e.printStackTrace();
-		}
+		String encryptedToken = tokenCreator.encryptToken(signedJWT);
 
 		log.info("Token generated successfully, adding it to the response header");
 

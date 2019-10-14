@@ -1,6 +1,5 @@
 package br.com.bandtec.bora.token.security.util;
 
-
 import br.com.bandtec.bora.core.model.Usuario;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.JWTClaimsSet;
@@ -17,7 +16,6 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class SecurityContextUtil {
 	private SecurityContextUtil() {
-
 	}
 
 	public static void setSecurityContext(SignedJWT signedJWT) {

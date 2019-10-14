@@ -2,14 +2,12 @@ package br.com.bandtec.bora.token.security.token;
 
 import br.com.bandtec.bora.core.model.Usuario;
 import br.com.bandtec.bora.core.property.JwtConfiguration;
-
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JOSEObject;
 import com.nimbusds.jose.JOSEObjectType;
 import com.nimbusds.jose.JWEAlgorithm;
 import com.nimbusds.jose.JWEHeader;
@@ -17,21 +15,18 @@ import com.nimbusds.jose.JWEObject;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.Payload;
-import com.nimbusds.jose.crypto.DirectDecrypter;
 import com.nimbusds.jose.crypto.DirectEncrypter;
 import com.nimbusds.jose.crypto.RSASSASigner;
-
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
-
 import java.security.interfaces.RSAPublicKey;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.UUID;
 import static java.util.stream.Collectors.toList;
@@ -43,7 +38,8 @@ public class TokenCreator {
 
 	private final JwtConfiguration jwtConfiguration;
 
-	public SignedJWT createSignedJWT(Authentication auth) throws NoSuchAlgorithmException {
+	@SneakyThrows
+	public SignedJWT createSignedJWT(Authentication auth) {
 		log.info("Cria sessao JWT");
 
 		Usuario usuario = (Usuario) auth.getPrincipal();
@@ -56,21 +52,14 @@ public class TokenCreator {
 		JWK jwk = new RSAKey.Builder((RSAPublicKey) rsaKeys.getPublic()).keyID(UUID.randomUUID().toString()).build();
 
 		SignedJWT signedJwt = new SignedJWT(
-				new JWSHeader.Builder(JWSAlgorithm.RS256)
-				.jwk(jwk)
-				.type(JOSEObjectType.JWT)
-				.build(), jwtClaimsSet);
-		
+				new JWSHeader.Builder(JWSAlgorithm.RS256).jwk(jwk).type(JOSEObjectType.JWT).build(), jwtClaimsSet);
+
 		log.info("Vincula token com private RSA key");
 
 		RSASSASigner signer = new RSASSASigner(rsaKeys.getPrivate());
 
-		try {
-			signedJwt.sign(signer);
-		} catch (JOSEException e) {
-			e.printStackTrace();
-		}
-		
+		signedJwt.sign(signer);
+
 		log.info("Serializa token '{}'", signedJwt.serialize());
 
 		return signedJwt;
@@ -80,19 +69,16 @@ public class TokenCreator {
 	private JWTClaimsSet createJwtClaimsSet(Authentication auth, Usuario usuario) {
 		log.info("Cria objeto jwt-Claims-Set para '{}'", usuario);
 
-		return new JWTClaimsSet.Builder()
-				.subject(usuario.getApelido())
-				.claim("authorities", auth.getAuthorities()
-						.stream().map(GrantedAuthority::getAuthority)
-						.collect(toList()))
-				.claim("userId", usuario.getId())
-				.issuer("http://localhost")
-				.issueTime(new Date())
+		return new JWTClaimsSet.Builder().subject(usuario.getApelido())
+				.claim("authorities",
+						auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(toList()))
+				.claim("userId", usuario.getId()).issuer("http://localhost").issueTime(new Date())
 				.expirationTime(new Date(System.currentTimeMillis() + (jwtConfiguration.getExpiration() * 1000)))
 				.build();
 	}
 
-	private KeyPair generateKeyPair() throws NoSuchAlgorithmException {
+	@SneakyThrows
+	private KeyPair generateKeyPair() {
 		log.info("Gera RSA 2048 bits keys");
 
 		KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
@@ -101,7 +87,6 @@ public class TokenCreator {
 
 		return generator.genKeyPair();
 	}
-
 
 	public String encryptToken(SignedJWT signedJWT) throws JOSEException {
 		log.info("Starting the encryptToken method");
