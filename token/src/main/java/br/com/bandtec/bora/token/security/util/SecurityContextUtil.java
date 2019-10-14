@@ -1,4 +1,5 @@
-package security.util;
+package br.com.bandtec.bora.token.security;
+
 
 import br.com.bandtec.bora.core.model.Usuario;
 import com.nimbusds.jose.JOSEException;
