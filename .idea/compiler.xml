@@ -2,16 +2,17 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gateway" />
+        <module name="discovery" />
+        <module name="core" />
+        <module name="auth" />
         <module name="token" />
         <module name="bora" />
-        <module name="auth" />
-        <module name="core" />
-        <module name="discovery" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.token.security.util.security.config;
+package br.com.bandtec.bora.token.security.config;
 
 import br.com.bandtec.bora.core.property.JwtConfiguration;
 import lombok.RequiredArgsConstructor;

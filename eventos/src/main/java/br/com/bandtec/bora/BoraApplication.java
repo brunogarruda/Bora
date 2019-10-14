@@ -8,8 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import br.com.bandtec.bora.core.property.JwtConfiguration;
 
-
-
 @SpringBootApplication
 @EntityScan(basePackages = { "br.com.bandtec.bora.core.model" })
 @EnableJpaRepositories(basePackages = { "br.com.bandtec.bora.core.repository" })

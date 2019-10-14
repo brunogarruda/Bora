@@ -1,7 +1,7 @@
-package br.com.bandtec.bora.token.security.util.security.filter;
+package br.com.bandtec.bora.token.security.filter;
 
 import br.com.bandtec.bora.core.property.JwtConfiguration;
-import br.com.bandtec.bora.token.security.util.security.token.TokenConverter;
+import br.com.bandtec.bora.token.security.token.TokenConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.SignedJWT;
 
-import security.util.SecurityContextUtil;
+import br.com.bandtec.bora.token.security.util.SecurityContextUtil;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

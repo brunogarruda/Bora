@@ -1,0 +1,6 @@
+#FileLock
+#Mon Oct 14 18:49:17 BRT 2019
+hostName=HSL004
+id=16dcc3f34540fdefac34ea675347fed1bbdeaaa8cea
+method=file
+server=10.0.3.10\:51816

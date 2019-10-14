@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.token.security;
+package br.com.bandtec.bora.token.security.util;
 
 
 import br.com.bandtec.bora.core.model.Usuario;

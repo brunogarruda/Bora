@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-
 public class UsuarioService {
 
 	private final UsuarioRepositorio usuarioRepositorio;
@@ -20,16 +19,4 @@ public class UsuarioService {
 		log.info("Listing all eventos");
 		return usuarioRepositorio.findAll();
 	}
-
-//	public Usuario cadastrarUsuario(Usuario usuario) {
-//		return usuarioRepositorio.save(usuario);
-//	}
-//
-//	public Optional<Usuario> buscarUsuarioPeloIdUsuario(Long idUsuario) {
-//		return usuarioRepositorio.findById(idUsuario);
-//	}
-//
-//	public void deletarUsuario(Long idUsuario) {
-//		usuarioRepositorio.deleteById(idUsuario);
-//	}
 }

@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.token.security.util.security.token;
+package br.com.bandtec.bora.token.security.token;
 
 import br.com.bandtec.bora.core.property.JwtConfiguration;
 

@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import security.config.SecurityTokenConfig;
-import security.token.TokenConverter;
-import security.token.TokenCreator;
+import br.com.bandtec.bora.token.security.config.SecurityTokenConfig;
+import br.com.bandtec.bora.token.security.filter.JwtTokenAuthorizationFilter;
+import br.com.bandtec.bora.token.security.token.TokenConverter;
+import br.com.bandtec.bora.token.security.token.TokenCreator;
 
 @EnableWebSecurity
 public class SecurityCredentialsConfig extends SecurityTokenConfig {
@@ -32,8 +34,8 @@ public class SecurityCredentialsConfig extends SecurityTokenConfig {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
-                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(),jwtConfiguration, tokenCreator))
-                .addFilterAfter(new JwtTokenAuthorizationFilter(jwtConfiguration, tokenConverter), UsernamePasswordAuthenticationFilter.class);
+                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(),jwtConfiguration,tokenCreator))
+                .addFilterAfter(new JwtTokenAuthorizationFilter(jwtConfiguration,tokenConverter),UsernamePasswordAuthenticationFilter.class);
         super.configure(http);
     }
 

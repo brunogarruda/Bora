@@ -5,9 +5,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.com.bandtec.bora.core.property.JwtConfiguration;
-import security.config.SecurityTokenConfig;
-import security.filter.JwtTokenAuthorizationFilter;
-import security.token.TokenConverter;
+import br.com.bandtec.bora.token.security.config.SecurityTokenConfig;
+import br.com.bandtec.bora.token.security.filter.JwtTokenAuthorizationFilter;
+import br.com.bandtec.bora.token.security.token.TokenConverter;
 
 @EnableWebSecurity
 public class SecurityCredentialsConfig extends SecurityTokenConfig {
