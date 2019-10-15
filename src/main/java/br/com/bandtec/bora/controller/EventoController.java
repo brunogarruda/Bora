@@ -31,12 +31,11 @@ public class EventoController {
 	@Autowired
 	private EventoService eventoService;
 
-	
 	@GetMapping("/eventos")
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoService.buscarTodosEventos(evento);
 	}
-	
+
 	@PostMapping("/eventos")
 	public ResponseEntity<CadastrarEvento> cadastrarEvento(@RequestBody CadastrarEvento cadastrarEvento) {
 		eventoService.cadastrarEvento(cadastrarEvento);
@@ -59,7 +58,7 @@ public class EventoController {
 	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
 		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
 	}
-	
+
 	@GetMapping("/eventos/buscar-evento-por-subcategoria/{subcategoria}")
 	public Evento buscarEventoPorSubCategoria(@RequestBody SubCategoria subcategoria) {
 		return eventoService.buscarEventoPorSubCategoria(subcategoria.getNome());

@@ -1,0 +1,6 @@
+#FileLock
+#Mon Oct 14 21:50:29 BRT 2019
+hostName=HSL154.Digital.net
+id=16dcce50f9ba435100dbc559096b48655d72fe29477
+method=file
+server=10.3.1.31\:50272
