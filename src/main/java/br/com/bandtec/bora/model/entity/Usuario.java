@@ -13,11 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -26,14 +21,13 @@ import br.com.bandtec.bora.model.entity.UsuarioEvento;
 
 @Entity
 @Table(name = "tbd_usuario")
-public class Usuario implements UserDetails {
+public class Usuario{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
-	@JsonIgnore
 	private Long idUsuario;
 
 	@Size(min = 2)
@@ -120,53 +114,4 @@ public class Usuario implements UserDetails {
 //	public List<UsuarioEvento> getTodosEventos() {
 //		return todosEventos;
 //	}
-
-	@JsonIgnore
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@JsonIgnore
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return new BCryptPasswordEncoder().encode(senha);
-	}
-
-	@JsonIgnore
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return this.apelido;
-	}
-	
-	@JsonIgnore
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@JsonIgnore
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@JsonIgnore
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@JsonIgnore
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 }

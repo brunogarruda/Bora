@@ -28,7 +28,6 @@ public class UsuarioEvento {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "evento_id")
-	@JsonIgnoreProperties
 	private Evento evento;
 	
 	@Column(name = "is_organizador" , nullable = false)

@@ -13,17 +13,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "tbd_evento")
-@Data
 public class Evento {
 
 	@Id
@@ -54,8 +47,7 @@ public class Evento {
 	
 	private String senha;
 	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@NotEmpty
 	private Categoria categoria;
 
@@ -63,12 +55,6 @@ public class Evento {
 	@OneToOne
 	@JoinColumn(name="idEndereco")
 	private Endereco endereco;
-
-//	@JsonBackReference
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-//	@JoinColumn(name = "organizador_id")
-//	private UsuarioEvento organizador;
-
 	
 	public Evento() {
 	}
@@ -85,7 +71,6 @@ public class Evento {
 		this.senha = senha;
 		this.categoria = categoria;
 		this.endereco = endereco;
-//		this.organizador = organizador;
 	}
 
 	public Long getIdEvento() {
@@ -159,13 +144,4 @@ public class Evento {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
-
-//	public UsuarioEvento getOrganizador() {
-//		return organizador;
-//	}
-//
-//	public void setOrganizador(UsuarioEvento organizador) {
-//		this.organizador = organizador;
-//	}
 }

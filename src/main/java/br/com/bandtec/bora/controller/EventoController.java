@@ -2,6 +2,7 @@ package br.com.bandtec.bora.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import br.com.bandtec.bora.model.dto.CadastrarEvento;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
-import br.com.bandtec.bora.model.excecoes.DomainException;
 import br.com.bandtec.bora.model.service.EventoService;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
@@ -46,10 +46,10 @@ public class EventoController {
 			@Valid @RequestBody Evento evento) {
 		return ResponseEntity.ok(eventoService.atualizarEvento(idEvento, evento));
 	}
-
-	@GetMapping("eventos/{nomeEvento}")
-	public ResponseEntity<List<Evento>> buscarEventoPorNome(@PathVariable(value = "nomeEvento") String nomeEvento) {
-		return ResponseEntity.ok(eventoService.buscarEventoPorNome(nomeEvento));
+	
+	@GetMapping("eventos/{id}")
+	public ResponseEntity<Optional<Evento>> buscarEventoPorId(@PathVariable(value = "id") Long id) {
+		return ResponseEntity.ok(eventoService.buscarPorId(id));
 
 	}
 

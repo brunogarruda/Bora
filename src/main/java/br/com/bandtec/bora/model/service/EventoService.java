@@ -1,6 +1,7 @@
 package br.com.bandtec.bora.model.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -43,6 +44,10 @@ public class EventoService {
 
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
+	}
+	
+	public Optional<Evento> buscarPorId(Long id) {
+		return eventoRepositorio.findById(id);
 	}
 
 
