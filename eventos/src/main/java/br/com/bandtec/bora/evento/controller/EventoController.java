@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.controller;
+package br.com.bandtec.bora.evento.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.bandtec.bora.core.model.Evento;
-import br.com.bandtec.bora.model.service.EventoService;
+import br.com.bandtec.bora.evento.model.service.EventoService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

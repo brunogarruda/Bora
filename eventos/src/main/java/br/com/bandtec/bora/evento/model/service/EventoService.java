@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.model.service;
+package br.com.bandtec.bora.evento.model.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

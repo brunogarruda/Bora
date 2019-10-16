@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.security;
+package br.com.bandtec.bora.evento.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
