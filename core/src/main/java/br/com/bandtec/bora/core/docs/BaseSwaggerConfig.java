@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
@@ -26,8 +27,11 @@ public class BaseSwaggerConfig {
 	}
 
 	private ApiInfo metaData() {
-		return new ApiInfoBuilder().title("Bora - Rede de eventos").description("Documentacao das APIs").version("1.0")
-				.build();
+		return new ApiInfoBuilder().title("Another Awesome course from DevDojo <3 Spring Boot Microservices")
+				.description("Everybody is a Jedi now").version("1.0")
+				.contact(new Contact("William Suane as the Jedi Master", "http://devdojo.academy",
+						"william.suane@devdojo.academy"))
+				.license("Private stuff bro, belongs to DevDojo").licenseUrl("http://devdojo.academy").build();
 
 	}
 

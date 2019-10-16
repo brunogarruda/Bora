@@ -3,9 +3,13 @@ package br.com.bandtec.bora.token.security.config;
 import br.com.bandtec.bora.core.property.JwtConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.cors.CorsConfiguration;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 import javax.servlet.http.HttpServletResponse;
@@ -16,16 +20,10 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
-				.and().sessionManagement().sessionCreationPolicy(STATELESS).and().exceptionHandling()
-				.authenticationEntryPoint((req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED)).and()
-				.authorizeRequests().antMatchers(jwtConfiguration.getLoginUrl(), "/**/swagger-ui-html").permitAll()
-				.antMatchers(HttpMethod.GET, "/**/swagger-resources/**", "/**/webjars/springfox-swagger-ui/**",
-						"/**/v2/api-docs/**")
-				.permitAll().antMatchers("/eventos/v1/usuario/**").hasRole("ADMIN").antMatchers("/auth/usuario/**")
-				.hasAnyRole("ADMIN", "USER").anyRequest().authenticated();
-		
-		http.headers().frameOptions().disable();
+		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.GET, "**/**").permitAll()
+				.antMatchers("/**/swagger-ui.html").permitAll().antMatchers(HttpMethod.GET, "/**/swagger-resources/**",
+						"/**/webjars/springfox-swagger-ui/**", "/**/v2/api-docs/**")
+				.permitAll();
 
 	}
 

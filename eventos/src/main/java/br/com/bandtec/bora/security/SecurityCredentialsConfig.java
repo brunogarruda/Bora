@@ -1,5 +1,7 @@
 package br.com.bandtec.bora.security;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -10,6 +12,8 @@ import br.com.bandtec.bora.token.security.filter.JwtTokenAuthorizationFilter;
 import br.com.bandtec.bora.token.security.token.TokenConverter;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
+@Configuration
 public class SecurityCredentialsConfig extends SecurityTokenConfig {
 	private final TokenConverter tokenConverter;
 

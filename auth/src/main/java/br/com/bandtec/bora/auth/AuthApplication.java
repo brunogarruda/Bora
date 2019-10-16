@@ -14,7 +14,7 @@ import br.com.bandtec.bora.core.property.JwtConfiguration;
 @EntityScan({"br.com.bandtec.core.model"})
 @EnableJpaRepositories({"br.com.bandtec.core.repository"})
 @EnableEurekaClient
-@ComponentScan("br.com.bandtec.bora")
+@ComponentScan(value = "br.com.bandtec.bora")
 public class AuthApplication {
 
     public static void main(String[] args) {

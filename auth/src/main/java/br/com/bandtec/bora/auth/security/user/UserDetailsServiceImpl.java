@@ -18,7 +18,7 @@ import static org.springframework.security.core.authority.AuthorityUtils.commaSe
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserDetailsServiceImpl implements UserDetailsService {
-	private final UsuarioRepositorio usuarioRepositorio;
+	private UsuarioRepositorio usuarioRepositorio;
 
 	@Override
 	public UserDetails loadUserByUsername(String apelido) {
