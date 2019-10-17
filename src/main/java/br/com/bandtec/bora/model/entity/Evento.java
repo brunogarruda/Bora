@@ -1,7 +1,5 @@
 package br.com.bandtec.bora.model.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
 
 @Entity
 @Table(name = "tbd_evento")
+@Data
 public class Evento {
 
 	@Id
@@ -41,98 +43,53 @@ public class Evento {
 	private String dataHoraFim;
 	
 	@Size(max = 255)
-	private String descricao;
+	@Column(name = "descricao")
+	private String descricaoEvento;
 
 	@Column(name = "is_privado")
 	private boolean isPrivado;
 	
 	private String senha;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@NotEmpty
 	private Categoria categoria;
 
 	@NotEmpty
-	private String endereco;
+	@OneToOne
+	@JoinColumn(name="idEndereco")
+	private Endereco endereco;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "organizador_id")
-	private Usuario organizador;
+//	@JsonBackReference
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+//	@JoinColumn(name = "organizador_id")
+//	private UsuarioEvento organizador;
 
+	
 	public Evento() {
 	}
 
-	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty Categoria categoria,
-			@NotEmpty String dataHoraInicio, @NotEmpty String endereco, Usuario organizador) {
+	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty String dataHoraInicio,
+			String dataHoraFim, @Size(max = 255) String descricao, boolean isPrivado, String senha,
+			@NotEmpty Categoria categoria, @NotEmpty Endereco endereco, UsuarioEvento organizador) {
 		this.idEvento = idEvento;
 		this.nome = nome;
-		this.categoria = categoria;
 		this.dataHoraInicio = dataHoraInicio;
-		this.endereco = endereco;
-		this.organizador = organizador;
-	}
-
-	public Long getIdEvento() {
-		return idEvento;
-	}
-
-	public void setIdEvento(Long idEvento) {
-		this.idEvento = idEvento;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public String getDataHoraInicio() {
-		return dataHoraInicio;
-	}
-
-	public void setDataHoraInicio(String dataHoraInicio) {
-		this.dataHoraInicio = dataHoraInicio;
-	}
-
-	public String getDataHoraFim() {
-		return dataHoraFim;
-	}
-
-	public void setDataHoraFim(String dataHoraFim) {
 		this.dataHoraFim = dataHoraFim;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
+		this.descricaoEvento = descricao;
+		this.isPrivado = isPrivado;
+		this.senha = senha;
+		this.categoria = categoria;
 		this.endereco = endereco;
-	}
+//		this.organizador = organizador;
+	}	
 
-	public Usuario getOrganizador() {
-		return organizador;
-	}
-
-	public void setOrganizador(Usuario organizador) {
-		this.organizador = organizador;
-	}
+//	public UsuarioEvento getOrganizador() {
+//		return organizador;
+//	}
+//
+//	public void setOrganizador(UsuarioEvento organizador) {
+//		this.organizador = organizador;
+//	}
 }

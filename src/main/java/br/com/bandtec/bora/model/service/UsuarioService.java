@@ -14,8 +14,12 @@ public class UsuarioService {
 	private UsuarioRepositorio usuarioRepositorio;
 
 	
-	public List<Usuario> buscarTodosUsuarios() {
-		return (List<Usuario>) usuarioRepositorio.findAll();
+	public List<Usuario> buscarTodosUsuarios() throws Exception {
+		List<Usuario> usuarios = usuarioRepositorio.findAll();
+		if (usuarios.isEmpty()) {
+			throw new Exception("Nenhum usuario encontrado");
+		}
+		return usuarios;
 	}
 	
 	

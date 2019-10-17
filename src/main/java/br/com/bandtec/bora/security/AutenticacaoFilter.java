@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.bora;
+package br.com.bandtec.bora.security;
 
 import java.io.IOException;
 

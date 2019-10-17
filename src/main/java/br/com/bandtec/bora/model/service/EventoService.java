@@ -43,9 +43,9 @@ public class EventoService {
 		return (List<Evento>) eventoRepositorio.findByNome(nomeEvento);
 	}
 
-	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
-		return eventoRepositorio.findByOrganizador(usuario.getApelido());
-	}
+//	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
+//		return eventoRepositorio.findByOrganizador(usuario.getApelido());
+//	}
 
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
@@ -67,11 +67,12 @@ public class EventoService {
 		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
 		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
 		evento.setNome(cadastrarEvento.getEvento().getNome());
-		evento.setOrganizador(usuario);
+//		evento.setOrganizador(usuario);
 
 		usuarioEventoRepositorio.save(usuarioEvento);
 		usuarioEvento.setEvento(evento);
 		usuarioEvento.setUsuario(usuario);
+		usuarioEvento.setOrganizador(true);
 		
 	}
 

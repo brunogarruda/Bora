@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.bora;
+package br.com.bandtec.bora.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

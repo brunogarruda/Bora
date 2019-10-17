@@ -17,37 +17,27 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.excecoes.DomainException;
 import br.com.bandtec.bora.model.service.UsuarioService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/usuarios")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UsuarioController {
 
-	@Autowired
-	private UsuarioService usuarioService;
+	private final UsuarioService usuarioService;
 
-	/*
-	 * Para cadastrar um usuario
-	 */
-	
-	@PostMapping("/usuarios")
+
+	@PostMapping
 	public ResponseEntity<Usuario> criarUsuario(@Valid @RequestBody Usuario usuario) {
 		return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuario));
 	}
 
-	/*
-	 * Para buscar todos os usuarios cadastrados
-	 */
-
-	@GetMapping("/usuarios")
-	public List<Usuario> buscarTodosUsuarios() {
-		return usuarioService.buscarTodosUsuarios();
+	@GetMapping
+	public ResponseEntity<List<Usuario>> buscarTodosUsuarios() throws Exception {
+		return ResponseEntity.ok(usuarioService.buscarTodosUsuarios());
 	}
 
-	/*
-	 * Para buscar usuarios cadastrados pelo idUsuario
-	 */
-
-	@GetMapping("usuarios/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> buscarUsuarioPeloIdUsuario(@PathVariable(value = "id") Long idUsuario) {
 		Usuario buscarUsuario = usuarioService.buscarUsuarioPeloIdUsuario(idUsuario);
 
@@ -80,11 +70,7 @@ public class UsuarioController {
 //		return ResponseEntity.ok(usuarioAlterado);
 //	}
 //
-	/*
-	 * Deletar um usuario
-	 */
-	
-	@DeleteMapping("usuarios/{idUsuario}")
+	@DeleteMapping("/{idUsuario}")
 	public void deletarUsuario(@PathVariable(value = "idUsuario") Long idUsuario) {
 		 usuarioService.deletarUsuario(idUsuario);
 	}

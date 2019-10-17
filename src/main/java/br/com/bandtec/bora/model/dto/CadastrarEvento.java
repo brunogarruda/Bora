@@ -2,8 +2,10 @@ package br.com.bandtec.bora.model.dto;
 
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
+import lombok.Data;
 import br.com.bandtec.bora.model.entity.Categoria;;
 
+@Data
 public class CadastrarEvento {
 
 	private Usuario usuario;
@@ -17,29 +19,4 @@ public class CadastrarEvento {
 		this.usuario = new Usuario(usuario.getIdUsuario());
 		this.evento = evento;
 	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Evento getEvento() {
-		return evento;
-	}
-
-	public void setEvento(Evento evento) {
-		this.evento = evento;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
 }

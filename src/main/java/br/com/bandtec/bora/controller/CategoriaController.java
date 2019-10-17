@@ -8,23 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.bandtec.bora.model.entity.Categoria;
 import br.com.bandtec.bora.model.service.CategoriaService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/categoria")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CategoriaController {
 
-	@Autowired
-	CategoriaService categoriaService;
+	private final CategoriaService categoriaService;
 	
-	@GetMapping("/categoria")
-	public ResponseEntity<List<Categoria>> pesquisarCategorias(){
-		
-		List<Categoria> categorias = categoriaService.pesquisarTodasCategorias();
-		
-		if(categorias.isEmpty()) {
-			return ResponseEntity.noContent().build();
-		}else {
-			return ResponseEntity.ok(categorias);
-		}
+	@GetMapping
+	public ResponseEntity<List<Categoria>> buscarTodasCategorias() throws Exception{
+		return ResponseEntity.ok(categoriaService.buscarTodasCategorias());
 	}
 }

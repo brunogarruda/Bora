@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.bora;
+package br.com.bandtec.bora;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

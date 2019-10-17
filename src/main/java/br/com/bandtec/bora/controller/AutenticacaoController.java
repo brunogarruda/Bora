@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bandtec.bora.bora.TokenService;
 import br.com.bandtec.bora.model.dto.TokenDto;
 import br.com.bandtec.bora.model.form.LoginForm;
+import br.com.bandtec.bora.security.TokenService;
 
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AutenticacaoController {
 
 	@Autowired

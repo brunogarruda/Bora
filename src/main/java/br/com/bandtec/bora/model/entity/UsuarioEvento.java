@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "tbd_participante_evento")
 public class UsuarioEvento {
@@ -33,6 +36,9 @@ public class UsuarioEvento {
 	
 	@Column(name = "is_organizador" , nullable = false)
 	private boolean isOrganizador; 
+	
+	
+	
 
 	public UsuarioEvento() {
 	}
@@ -41,21 +47,4 @@ public class UsuarioEvento {
 		this.usuario = usuario;
 		this.evento = evento;
 	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Evento getEvento() {
-		return evento;
-	}
-
-	public void setEvento(Evento evento) {
-		this.evento = evento;
-	}
-
 }
