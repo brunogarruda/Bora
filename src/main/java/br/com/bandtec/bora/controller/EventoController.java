@@ -36,6 +36,7 @@ public class EventoController {
 	@PostMapping("/eventos")
 	public ResponseEntity<CadastrarEvento> cadastrarEvento(@RequestBody CadastrarEvento cadastrarEvento) {
 		eventoService.cadastrarEvento(cadastrarEvento);
+		return cadastrarEvento(cadastrarEvento);
 	}
 	
 	@GetMapping
@@ -60,9 +61,9 @@ public class EventoController {
 //		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
 //	}
 
-	@GetMapping("/eventos/evento-subcategoria/{subcategoria}")
-	public Evento buscarEventoPorSubCategoria(@RequestBody SubCategoria subcategoria) {
-		return eventoService.buscarEventoPorSubCategoria(subcategoria.getNome());
+	@GetMapping("/evento-subcategoria/{nmSubcategoria}")
+	public List<Evento> buscarEventoPorSubCategoria(@PathVariable(value = "nmSubcategoria") String nmSubcategoria) {
+		return (List <Evento>) eventoService.buscarEventoPorSubCategoria(nmSubcategoria);
 	}
 
 }

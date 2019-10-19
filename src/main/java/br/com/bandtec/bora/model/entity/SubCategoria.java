@@ -10,37 +10,39 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "TBD_SUB_CATEGORIA")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class SubCategoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_sub_categoria")
-	@JsonIgnore
-	private Long id;
+	private Long idSubCategoria;
 	
 	@Column(name = "nome_sub_categoria")
 	private String nome;
 	
 	@ManyToOne
-	@JoinColumn(name = "idCategoria")
+	@JoinColumn(name = "categoria_id_fk")
 	@NotEmpty
-	private Categoria categoria;
+	private Categoria categoriaIdFk;
 	
 	
 
 	public SubCategoria() {
 	}
 
-	public SubCategoria(Long id, String nome, @NotEmpty Categoria categoria) {
-		this.id = id;
+	public SubCategoria(Long idSubCategoria, String nome, @NotEmpty Categoria categoriaIdFk) {
+		this.idSubCategoria = idSubCategoria;
 		this.nome = nome;
-		this.categoria = categoria;
+		this.categoriaIdFk = categoriaIdFk;
 	}
 }

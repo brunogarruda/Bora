@@ -14,13 +14,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
 @Entity
 @Table(name = "tbd_evento")
 @Data
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Evento {
 
 	@Id
@@ -34,12 +38,10 @@ public class Evento {
 	private String nome;
 	
 	@NotEmpty
-	@Column(name = "data_hora_inicio")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "data_hora_inicio")	
 	private String dataHoraInicio;
 
 	@Column(name = "data_hora_fim")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private String dataHoraFim;
 	
 	@Size(max = 255)
@@ -51,20 +53,20 @@ public class Evento {
 	
 	private String senha;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@NotEmpty
-	private Categoria categoria;
+	@JoinColumn(name="categoria_id_fk")
+	private Categoria idCategoria;
 
 	@NotEmpty
 	@OneToOne
-	@JoinColumn(name="idEndereco")
+	@JoinColumn(name="endereco_id_fk")
 	private Endereco endereco;
 
-//	@JsonBackReference
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-//	@JoinColumn(name = "organizador_id")
-//	private UsuarioEvento organizador;
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "organizador_id_fk")
+	private UsuarioEvento organizador;
 
 	
 	public Evento() {
@@ -72,7 +74,7 @@ public class Evento {
 
 	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty String dataHoraInicio,
 			String dataHoraFim, @Size(max = 255) String descricao, boolean isPrivado, String senha,
-			@NotEmpty Categoria categoria, @NotEmpty Endereco endereco, UsuarioEvento organizador) {
+			@NotEmpty Categoria idCategoria, @NotEmpty Endereco endereco, UsuarioEvento organizador) {
 		this.idEvento = idEvento;
 		this.nome = nome;
 		this.dataHoraInicio = dataHoraInicio;
@@ -80,9 +82,9 @@ public class Evento {
 		this.descricaoEvento = descricao;
 		this.isPrivado = isPrivado;
 		this.senha = senha;
-		this.categoria = categoria;
+		this.idCategoria = idCategoria;
 		this.endereco = endereco;
-//		this.organizador = organizador;
+     	this.organizador = organizador;
 	}	
 
 //	public UsuarioEvento getOrganizador() {

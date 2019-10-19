@@ -34,7 +34,7 @@ public class EventoService {
 		evento.setIdEvento(idEvento);
 		evento.setNome(evento.getNome());
 		evento.setEndereco(evento.getEndereco());
-		evento.setCategoria(evento.getCategoria());
+		evento.setIdCategoria(evento.getIdCategoria());
 		evento.setDataHoraInicio(evento.getDataHoraInicio());
 		return eventoRepositorio.save(evento);
 	}
@@ -51,8 +51,8 @@ public class EventoService {
 		return eventoRepositorio.findAll();
 	}
 	
-	public Evento buscarEventoPorSubCategoria(String subcategoria) {
-		return eventoRepositorio.buscarEventoPorSubCategoria(subcategoria);
+	public List<Evento> buscarEventoPorSubCategoria(String subcategoria) {
+		return (List<Evento>) eventoRepositorio.buscarEventoPorSubCategoria(subcategoria);
 	}
 
 
@@ -63,7 +63,7 @@ public class EventoService {
 		Evento evento = new Evento();
 		usuario.setIdUsuario(cadastrarEvento.getUsuario().getIdUsuario());
 		
-		evento.setCategoria(cadastrarEvento.getEvento().getCategoria());
+		evento.setIdCategoria(cadastrarEvento.getEvento().getIdCategoria());
 		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
 		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
 		evento.setNome(cadastrarEvento.getEvento().getNome());

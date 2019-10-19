@@ -1,0 +1,1 @@
+select * from tbd_evento, tbd_categoria, tbd_sub_categoria where tbd_categoria.id_categoria = tbd_sub_categoria.id_sub_categoria and tbd_evento.id_evento = tbd_categoria.id_categoria and tbd_evento.id_evento = tbd_sub_categoria.id_sub_categoria and tbd_sub_categoria.nome_sub_categoria = 'Futebol'

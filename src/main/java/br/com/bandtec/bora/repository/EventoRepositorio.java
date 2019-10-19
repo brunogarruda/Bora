@@ -16,8 +16,10 @@ public interface EventoRepositorio extends JpaRepository<Evento, Long>{
 	List<Evento> findByOrganizador(String organizador);
 	
 //	@Query(value = "SELECT u FROM Evento u where u.nome =:nome")
-	@Query(value = "select e from Evento e INNER JOIN Categoria c on c.id = e.id INNER JOIN SubCategoria sc on sc.id = c.id where sc.nome =:nome")	
-	Evento buscarEventoPorSubCategoria (@Param("nome") String nome);
+	//@Query(value = "select e from Evento e INNER JOIN Categoria c on c.idCategoria = e.idCategoria INNER JOIN SubCategoria sc on sc.idSubCategoria = c.idSubCategoria where sc.nome = :nome")
+	@Query(value = "select e,c,sc from Evento e, Categoria c, SubCategoria sc where c.idCategoria = sc.idSubCategoria and e.idEvento = c.idCategoria and e.idEvento = sc.idSubCategoria and sc.nome = :nome")
+	//select * from tbd_evento, tbd_categoria, tbd_sub_categoria where tbd_categoria.id_categoria = tbd_sub_categoria.id_sub_categoria and tbd_evento.id_evento = tbd_categoria.id_categoria and tbd_evento.id_evento = tbd_sub_categoria.id_sub_categoria and tbd_sub_categoria.nome_sub_categoria = 'Futebol'
+	List<Evento> buscarEventoPorSubCategoria (@Param("nome") String nome);
 
 //	List<Evento> findByOrganizador(String organizador); 
 }
