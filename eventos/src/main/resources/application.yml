@@ -1,4 +1,5 @@
 server:
+<<<<<<< HEAD
   port: 8082
 
 eureka:
@@ -33,3 +34,39 @@ spring:
 jwt:
   config:
     type: signed
+=======
+    port: 8082
+
+eureka:
+    instance:
+        prefer-ip-address: true
+    client:
+        service-url:
+            defaultZone: http://localhost:8081/eureka/
+        register-with-eureka: true
+
+spring:
+    application:
+        name: eventos
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+
+    jmx:
+        enabled: false
+    datasource:
+        url: jdbc:h2:file:./db/database;AUTO_SERVER=TRUE
+        username: sa
+        password:
+        driver-class-name: org.h2.Driver
+        platform: h2
+
+    h2:
+        console:
+            enabled: true
+            path: /console
+jwt:
+    config:
+        type: signed
+>>>>>>> origin/teste

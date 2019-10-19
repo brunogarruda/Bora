@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.docs;
+package br.com.bandtec.bora.evento.docs;
 
 import org.springframework.context.annotation.Configuration;
 
