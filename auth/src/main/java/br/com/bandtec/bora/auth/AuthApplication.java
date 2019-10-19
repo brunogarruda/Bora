@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import br.com.bandtec.bora.core.property.JwtConfiguration;
 
 @SpringBootApplication
-@EnableConfigurationProperties(value = JwtConfiguration.class)
 @EntityScan({"br.com.bandtec.core.model"})
 @EnableJpaRepositories({"br.com.bandtec.core.repository"})
 @EnableEurekaClient
+@EnableConfigurationProperties(value = JwtConfiguration.class)
 @ComponentScan(value = "br.com.bandtec.bora")
 public class AuthApplication {
 

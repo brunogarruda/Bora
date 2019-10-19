@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig extends BaseSwaggerConfig {
 	public SwaggerConfig() {
-		super("br.com.bandtec.bora.controller");
+		super("br.com.bandtec.bora.evento.controller");
 	}
 
 }
