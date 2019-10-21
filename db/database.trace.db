@@ -804,3 +804,15 @@ INSERT INTO TBD_USUARIO_EVENTO(ID_USUARIO_EVENTO,ID_EVENTO,IS_ORGANIZADOR) VALUE
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204)
 	at br.com.bandtec.bora.BoraApplication.main(BoraApplication.java:17)
+2019-10-20 19:47:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TBD_EVENTO" not found; SQL statement:
+select evento0_.id_evento as id_event1_2_, evento0_.categoria_id_categoria as categori8_2_, evento0_.data_hora_fim as data_hor2_2_, evento0_.data_hora_inicio as data_hor3_2_, evento0_.descricao as descrica4_2_, evento0_.id_endereco as id_ender9_2_, evento0_.is_privado as is_priva5_2_, evento0_.nome_evento as nome_eve6_2_, evento0_.senha as senha7_2_ from tbd_evento evento0_ [42102-199]
+2019-10-20 19:47:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TBD_EVENTO" not found; SQL statement:
+select evento0_.id_evento as id_event1_2_, evento0_.categoria_id_categoria as categori8_2_, evento0_.data_hora_fim as data_hor2_2_, evento0_.data_hora_inicio as data_hor3_2_, evento0_.descricao as descrica4_2_, evento0_.id_endereco as id_ender9_2_, evento0_.is_privado as is_priva5_2_, evento0_.nome_evento as nome_eve6_2_, evento0_.senha as senha7_2_ from tbd_evento evento0_ [42102-199]
+2019-10-20 19:47:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TBD_EVENTO" not found; SQL statement:
+select evento0_.id_evento as id_event1_2_, evento0_.categoria_id_categoria as categori8_2_, evento0_.data_hora_fim as data_hor2_2_, evento0_.data_hora_inicio as data_hor3_2_, evento0_.descricao as descrica4_2_, evento0_.id_endereco as id_ender9_2_, evento0_.is_privado as is_priva5_2_, evento0_.nome_evento as nome_eve6_2_, evento0_.senha as senha7_2_ from tbd_evento evento0_ [42102-199]
+2019-10-20 20:10:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TBD_EVENTO" not found; SQL statement:
+select evento0_.id_evento as id_event1_2_, evento0_.categoria_id_categoria as categori8_2_, evento0_.data_hora_fim as data_hor2_2_, evento0_.data_hora_inicio as data_hor3_2_, evento0_.descricao as descrica4_2_, evento0_.id_endereco as id_ender9_2_, evento0_.is_privado as is_priva5_2_, evento0_.nome_evento as nome_eve6_2_, evento0_.senha as senha7_2_ from tbd_evento evento0_ [42102-199]

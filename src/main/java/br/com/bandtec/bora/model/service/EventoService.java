@@ -14,17 +14,18 @@ import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
 import br.com.bandtec.bora.repository.EventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
+import util.GravaArquivo;
+import util.ListaObj;
 
 @Service
 public class EventoService {
 
+	ListaObj<Evento> lista = new ListaObj<Evento>(20);
 	@Autowired
 	private EventoRepositorio eventoRepositorio;
-
 	@Autowired
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
 
-	
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
 		evento.setIdEvento(idEvento);
 		evento.setNome(evento.getNome());
@@ -43,13 +44,24 @@ public class EventoService {
 //	}
 
 	public List<Evento> buscarTodosEventos(Evento evento) {
-		return eventoRepositorio.findAll();
-	}
-	
-	public Optional<Evento> buscarPorId(Long id) {
-		return eventoRepositorio.findById(id);
+
+		List<Evento> eventos = eventoRepositorio.findAll();
+		
+		for (Evento item : eventos) {
+			lista.adiciona(item);
+		}
+
+		if(lista.getTamanho() > 15) {
+			GravaArquivo.gravaArquivo(lista);
+			lista.limpa();	
+		}
+		
+		return eventos;
 	}
 
+	public Optional<Evento> buscarPorId(Long id) {
+		return eventoRepositorio.findById(id);		
+	}
 
 	@Transactional
 	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
@@ -57,7 +69,7 @@ public class EventoService {
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		Evento evento = new Evento();
 		usuario.setIdUsuario(cadastrarEvento.getUsuario().getIdUsuario());
-		
+
 		evento.setCategoria(cadastrarEvento.getEvento().getCategoria());
 		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
 		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
@@ -68,7 +80,7 @@ public class EventoService {
 		usuarioEvento.setEvento(evento);
 		usuarioEvento.setUsuario(usuario);
 		usuarioEvento.setOrganizador(true);
-		
+
 	}
 
 }

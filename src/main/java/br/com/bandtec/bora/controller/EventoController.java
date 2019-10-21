@@ -29,12 +29,30 @@ public class EventoController {
 	@Autowired
 	private EventoService eventoService;
 
-	
 	@GetMapping("/eventos")
-	public List<Evento> buscarTodosEventos(Evento evento) {
-		return eventoService.buscarTodosEventos(evento);
+	public ResponseEntity<List<Evento>> buscarTodosEventos(Evento evento) {
+		List<Evento> eventos = eventoService.buscarTodosEventos(evento);
+		if (eventos.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok().body(eventos);
 	}
+
+//	@GetMapping("/eventosHome")
+//	public ResponseEntity<List<Evento>> buscarEventoshome() {
+//		
+//	}
 	
+//	 Busca Eventos pelo Id - para o detalhamento do evento em outra tela.
+	@GetMapping("eventos/{id}")
+	public ResponseEntity<Optional<Evento>> buscarEventoPorId(@PathVariable(value = "id") Long id) {
+		Optional<Evento> evento = eventoService.buscarPorId(id);
+		if (evento == null) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok().body(evento);
+	}
+
 	@PostMapping("/eventos")
 	public ResponseEntity<CadastrarEvento> cadastrarEvento(@RequestBody CadastrarEvento cadastrarEvento) {
 		eventoService.cadastrarEvento(cadastrarEvento);
@@ -45,12 +63,6 @@ public class EventoController {
 	public ResponseEntity<Evento> atualizarEvento(@PathVariable(value = "idEvento") Long idEvento,
 			@Valid @RequestBody Evento evento) {
 		return ResponseEntity.ok(eventoService.atualizarEvento(idEvento, evento));
-	}
-	
-	@GetMapping("eventos/{id}")
-	public ResponseEntity<Optional<Evento>> buscarEventoPorId(@PathVariable(value = "id") Long id) {
-		return ResponseEntity.ok(eventoService.buscarPorId(id));
-
 	}
 
 //	@GetMapping("/eventos/{usuario}")

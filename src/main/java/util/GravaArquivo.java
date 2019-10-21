@@ -4,11 +4,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Formatter;
 import java.util.FormatterClosedException;
+
+import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
 
 public class GravaArquivo {
 
-	public static void gravaArquivo(ListaObj<Usuario> lista) {
+	public static void gravaArquivo(ListaObj<Evento> lista) {
 		FileWriter arq = null;
 		Formatter saida = null;
 		boolean error = false;
@@ -27,14 +29,18 @@ public class GravaArquivo {
 		
 		try {
 			for (int i=0; i < lista.getTamanho(); i++) {
-				Usuario a = lista.getElemento(i);
+				Evento a = lista.getElemento(i);
 				// Grava os atributos do objeto aluno no arquivo
 				// O %n indica que será gravado um fim de registro
 				// No Windows, o fim de registro é um \r\n
 				// No Linux e no MacOS, o fim de registro é um \n
 				
-//					saida.format("%d;%s;%.2f   %n",a.,	// grava os atributos do objeto aluno
-//														);	// separados por ';'
+					saida.format("%d;%s;%s;%s;%s;%s;%n",a.getIdEvento()
+												  ,a.getNome()
+												  ,a.getDataHoraInicio()
+												  ,a.getDataHoraFim()
+												  ,a.getCategoria()
+												  ,a.getEndereco());
 			}
 		}
 		catch (FormatterClosedException erro )
