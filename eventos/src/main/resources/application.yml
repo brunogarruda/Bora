@@ -1,35 +1,35 @@
 server:
-    port: 8082
+  port: 8082
 
 eureka:
-    instance:
-        prefer-ip-address: true
-    client:
-        service-url:
-            defaultZone: http://localhost:8081/eureka/
-        register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+    register-with-eureka: true
 
 spring:
-    application:
-        name: eventos
-    jpa:
-        show-sql: true
-        hibernate:
-            ddl-auto: update
+  application:
+    name: eventos
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 
-    jmx:
-        enabled: false
-    datasource:
-        url: jdbc:h2:file:./db/database;AUTO_SERVER=TRUE
-        username: sa
-        password:
-        driver-class-name: org.h2.Driver
-        platform: h2
+  jmx:
+    enabled: false
+  datasource:
+    url: jdbc:h2:file:./db/database;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    platform: h2
 
-    h2:
-        console:
-            enabled: true
-            path: /console
+  h2:
+    console:
+      enabled: true
+      path: /console
 jwt:
-    config:
-        type: signed
+  config:
+    type: signed
