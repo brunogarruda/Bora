@@ -27,9 +27,8 @@ public class UsuarioController {
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Iterable<Usuario>> list(Pageable pageable) {
-	return new ResponseEntity<>(service.buscarUsuarios(pageable), HttpStatus.OK);
+		return new ResponseEntity<>(service.buscarUsuarios(pageable), HttpStatus.OK);
 	}
-	
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<CadastrarUsuario> cadastrarUsuario(@Valid @RequestBody CadastrarUsuario cadastrarUsuario) {

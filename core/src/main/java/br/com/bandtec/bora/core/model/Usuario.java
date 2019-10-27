@@ -5,16 +5,18 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
+// @Getter
+// @Setter
+// @ToString
+
 @AllArgsConstructor
-@ToString
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Builder
+@Data
 @Table(name = "tbd_usuario")
+@Entity
 public class Usuario implements AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -23,6 +25,9 @@ public class Usuario implements AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private Long id;
+
+	@Column(name = "cod_usuario", unique = true)
+	private String codigoUsuario;
 
 	@NotNull(message = "Preenchimento Obrigatorio")
 	@Column(nullable = false)
@@ -38,8 +43,9 @@ public class Usuario implements AbstractEntity {
 	@Builder.Default
 	private String role = "USER";
 
-	public Usuario(@NotNull Usuario usuario) {
+	public @Builder Usuario(@NonNull Usuario usuario) {
 		this.id = usuario.getId();
+		this.codigoUsuario = usuario.getCodigoUsuario();
 		this.apelido = usuario.getApelido();
 		this.senha = usuario.getSenha();
 		this.role = usuario.getRole();

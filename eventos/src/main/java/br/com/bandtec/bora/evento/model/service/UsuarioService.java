@@ -25,8 +25,8 @@ public class UsuarioService {
 
 	private final UsuarioRepositorio usuarioRepositorio;
 
-	@Cacheable(value = "usersCache")
-	public Iterable<Usuario> buscarUsuarios(Pageable pageable) {
+	@Cacheable(value = "boraCache")
+	public Iterable<Usuario> buscarUsuarios(Pageable pageable) {								
 		log.info("Listing all usuario");
 		return usuarioRepositorio.findAll(pageable);
 	}

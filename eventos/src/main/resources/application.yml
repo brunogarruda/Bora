@@ -13,9 +13,12 @@ spring:
   application:
     name: eventos
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
 
   jmx:
     enabled: false
@@ -30,6 +33,11 @@ spring:
     console:
       enabled: true
       path: /console
+
+logging:
+  level:
+    org.hibernate.type: trace
+
 jwt:
   config:
     type: signed
