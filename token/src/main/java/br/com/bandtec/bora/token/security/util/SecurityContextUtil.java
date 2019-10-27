@@ -15,35 +15,35 @@ import static java.util.stream.Collectors.toList;
 
 @Slf4j
 public class SecurityContextUtil {
-	private SecurityContextUtil() {
-	}
+    private SecurityContextUtil() {
+    }
 
-	public static void setSecurityContext(SignedJWT signedJWT) {
-		try {
-			JWTClaimsSet claims = signedJWT.getJWTClaimsSet();
-			String usuario = claims.getSubject();
-			if (usuario == null)
-				throw new JOSEException("Ausencia de JWT");
+    public static void setSecurityContext(SignedJWT signedJWT) {
+        try {
+            JWTClaimsSet claims = signedJWT.getJWTClaimsSet();
+            String usuario = claims.getSubject();
+            if (usuario == null)
+                throw new JOSEException("Ausencia de JWT");
 
-			List<String> authorities = claims.getStringListClaim("authorities");
-			Usuario apelido = Usuario.builder().id(claims.getLongClaim("idUsuario")).apelido(usuario)
-					.role(String.join(",", authorities)).build();
+            List<String> authorities = claims.getStringListClaim("authorities");
+            Usuario.builder().id(claims.getLongClaim("idUsuario")).apelido(usuario).role(String.join(",", authorities))
+                    .build();
 
-			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(usuario, null,
-					createAuthorities(authorities));
-			auth.setDetails(signedJWT.serialize());
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(usuario, null,
+                    createAuthorities(authorities));
+            auth.setDetails(signedJWT.serialize());
 
-			SecurityContextHolder.getContext().setAuthentication(auth);
+            SecurityContextHolder.getContext().setAuthentication(auth);
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			log.error("Erro: Configurações sucurity context ", e);
-			SecurityContextHolder.clearContext();
-		}
-	}
+            log.error("Erro: Configurações sucurity context ", e);
+            SecurityContextHolder.clearContext();
+        }
+    }
 
-	private static List<SimpleGrantedAuthority> createAuthorities(List<String> authorities) {
-		return authorities.stream().map(SimpleGrantedAuthority::new).collect(toList());
-	}
+    private static List<SimpleGrantedAuthority> createAuthorities(List<String> authorities) {
+        return authorities.stream().map(SimpleGrantedAuthority::new).collect(toList());
+    }
 
 }

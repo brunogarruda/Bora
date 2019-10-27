@@ -1,6 +1,5 @@
 package br.com.bandtec.bora.core.model;
 
-import javax.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @Data
-@Embeddable
+//@Embeddable
 public class Endereco {
 
     private String rua;

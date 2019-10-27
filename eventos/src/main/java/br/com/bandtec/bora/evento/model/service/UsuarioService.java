@@ -2,12 +2,10 @@ package br.com.bandtec.bora.evento.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.com.bandtec.bora.core.model.Usuario;
 import br.com.bandtec.bora.core.repository.UsuarioRepositorio;
 import br.com.bandtec.bora.evento.model.dto.CadastrarUsuario;

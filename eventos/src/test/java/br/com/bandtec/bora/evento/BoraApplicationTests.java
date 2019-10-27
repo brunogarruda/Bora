@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.bora;
+package br.com.bandtec.bora.evento;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
