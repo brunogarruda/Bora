@@ -2,7 +2,9 @@ package br.com.bandtec.bora.evento.controller;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import br.com.bandtec.bora.core.model.Usuario;
 import br.com.bandtec.bora.evento.model.dto.CadastrarUsuario;
 import br.com.bandtec.bora.evento.model.service.UsuarioService;
 import io.swagger.annotations.Api;
+import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,32 +25,33 @@ import lombok.RequiredArgsConstructor;
 @Api(value = "Endpoints para gerenciar usuarios")
 public class UsuarioController {
 
-	private final UsuarioService service;
+    private final UsuarioService service;
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Iterable<Usuario>> list(Pageable pageable) throws Exception {
-		Iterable<Usuario> usuario = service.buscarUsuarios(pageable);
-		if (usuario == null)
-			ResponseEntity.noContent().build();
+    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Page<Usuario>> list(@PageableDefault(size = 10, sort = "apelido") Pageable pageable) {
+        Page<Usuario> page = service.buscarUsuarios(pageable);
 
-		return ResponseEntity.ok(usuario);
+        if (page.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-	}
+        return ResponseEntity.ok(page);
 
-	@PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<CadastrarUsuario> cadastrarUsuario(@Valid @RequestBody CadastrarUsuario cadastrarUsuario) {
-		service.cadastrarUsuario(cadastrarUsuario);
-		if (cadastrarUsuario == null)
-			ResponseEntity.badRequest().build();
+    }
 
-		return ResponseEntity.ok().build();
-	}
+    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<CadastrarUsuario> cadastrarUsuario(@Valid @RequestBody CadastrarUsuario cadastrarUsuario) {
+        service.cadastrarUsuario(cadastrarUsuario);
+        if (cadastrarUsuario == null)
+            ResponseEntity.badRequest().build();
 
-	// @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	// public ResponseEntity<Usuario> cadastrarUsuario(@Valid @RequestBody Usuario
-	// usuario) {
-	// service.cadastrar(usuario);
-	// return ResponseEntity.ok().build();
-	// }
+        return ResponseEntity.ok().build();
+    }
+
+    // @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    // public ResponseEntity<Usuario> cadastrarUsuario(@Valid @RequestBody Usuario
+    // usuario) {
+    // service.cadastrar(usuario);
+    // return ResponseEntity.ok().build();
+    // }
 
 }

@@ -20,24 +20,17 @@ import org.springframework.http.MediaType;
 @Api(value = "Endpoints para gerenciar eventos")
 public class EventoController {
 
-	private final EventoService service;
+    private final EventoService service;
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Iterable<Evento>> list(Pageable pageable) throws Exception {
-		if (list(pageable).getBody().equals(null))
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Iterable<Evento>> list(Pageable pageable) throws Exception {
+        return new ResponseEntity<>(service.buscarEventos(pageable), HttpStatus.OK);
+    }
 
-		return new ResponseEntity<>(service.buscarEventos(pageable), HttpStatus.OK);
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<Evento> buscarEventoPeloId(@PathVariable("id") Long id) {
-		Evento evento = service.buscarEventoPeloId(id);
-
-		if (evento.getId().equals(null))
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-		return ResponseEntity.ok(evento);
-	}
+    @GetMapping("/{id}")
+    public ResponseEntity<Evento> buscarEventoPeloId(@PathVariable("id") Long id) {
+        Evento evento = service.buscarEventoPeloId(id);
+        return ResponseEntity.ok(evento);
+    }
 
 }

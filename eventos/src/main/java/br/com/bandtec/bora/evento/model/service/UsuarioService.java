@@ -1,11 +1,22 @@
 package br.com.bandtec.bora.evento.model.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+
 import br.com.bandtec.bora.core.model.Usuario;
 import br.com.bandtec.bora.core.repository.UsuarioRepositorio;
 import br.com.bandtec.bora.evento.model.dto.CadastrarUsuario;
@@ -16,28 +27,28 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Transactional
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@CacheConfig(cacheNames = "boraCache")
 public class UsuarioService {
 
-	private final UsuarioRepositorio usuarioRepositorio;
+    private final UsuarioRepositorio usuarioRepositorio;
 
-	@Cacheable(value = "boraCache")
-	public Iterable<Usuario> buscarUsuarios(Pageable pageable) throws Exception {
-		Iterable<Usuario> usuario = usuarioRepositorio.findAll(Sort.by("apelido"));
-		log.info("Listing all usuario");
+    @CacheEvict(allEntries = true)
+    public void clearCache() {
+    }
 
-		if (usuario == null)
-			throw new Exception("Nenhum usuario encontrado");
+    @Cacheable
+    public Page<Usuario> buscarUsuarios(Pageable pageable) {
+        log.info("Listing all usuario");
+        return usuarioRepositorio.findAll(pageable);
+    }
 
-		return usuario;
-	}
-
-	// @Transactional
-	public void cadastrarUsuario(CadastrarUsuario cadastrarUsuario) {
-		Usuario usuario = new Usuario();
-		usuarioRepositorio.save(usuario);
-		usuario.setApelido(cadastrarUsuario.getUsuario().getApelido());
-		usuario.setSenha(cadastrarUsuario.getUsuario().getSenha());
-		usuario.setRole(cadastrarUsuario.getUsuario().getRole());
-		System.out.println(usuario);
-	}
+    // @Transactional
+    public void cadastrarUsuario(CadastrarUsuario cadastrarUsuario) {
+        Usuario usuario = new Usuario();
+        usuarioRepositorio.save(usuario);
+        usuario.setApelido(cadastrarUsuario.getUsuario().getApelido());
+        usuario.setSenha(cadastrarUsuario.getUsuario().getSenha());
+        usuario.setRole(cadastrarUsuario.getUsuario().getRole());
+        System.out.println(usuario);
+    }
 }

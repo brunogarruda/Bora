@@ -26,7 +26,7 @@ public class EventoService {
 	public Evento buscarEventoPeloId(Long id) {
 		log.info("Listing eventos");
 		return eventoRepositorio.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Usuario nao encontrado com o id:" + id));
+				.orElseThrow(() -> new IllegalArgumentException("Evento nao encontrado com o id:" + id));
 	}
 
 }

@@ -5,6 +5,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface UsuarioRepositorio extends PagingAndSortingRepository<Usuario, Long> {
 
-	Usuario findByApelido(String apelido);
-
+    Usuario findByApelido(String apelido);
 }
