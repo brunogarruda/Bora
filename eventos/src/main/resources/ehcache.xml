@@ -5,7 +5,7 @@
          monitoring="autodetect"
          dynamicConfig="true">
 
-    <cache name="ticketsCache"
+    <cache name="boraCache"
            maxElementsInMemory="100"
            eternal="false"
            overflowToDisk="false"

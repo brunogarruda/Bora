@@ -1,13 +1,6 @@
 package br.com.bandtec.bora.core.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import javax.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,18 +12,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @Data
-@Entity
-@Table(name = "tbd_endereco")
+@Embeddable
 public class Endereco {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    @Column(name = "id_endereco")
-    private Long id;
-
-    @Column(name = "cod_endereco")
-    private String codigoEndereco;
 
     private String rua;
 

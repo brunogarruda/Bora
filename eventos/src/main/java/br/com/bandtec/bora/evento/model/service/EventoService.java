@@ -1,9 +1,11 @@
 package br.com.bandtec.bora.evento.model.service;
 
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import br.com.bandtec.bora.core.repository.EventoRepositorio;
 import br.com.bandtec.bora.core.model.Evento;
@@ -16,8 +18,18 @@ import lombok.extern.slf4j.Slf4j;
 public class EventoService {
 	private final EventoRepositorio eventoRepositorio;
 
-	public Iterable<Evento> buscarEventos(Pageable pageable) {
+	public Iterable<Evento> buscarEventos(Pageable pageable) throws Exception {
 		log.info("Listing all eventos");
-		return eventoRepositorio.findAll(pageable);
+		if (eventoRepositorio.findAll(pageable).isEmpty())
+			throw new Exception("Nenhum evento encontrado");
+
+		return eventoRepositorio.findAll(Sort.by("nome"));
 	}
+
+	public Evento buscarEventoPeloId(Long id) {
+		log.info("Listing eventos");
+		return eventoRepositorio.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Usuario nao encontrado com o id:" + id));
+	}
+
 }
