@@ -28,7 +28,7 @@ public class Evento {
 	@Size(min = 2)
 	@Column(name = "nome_evento")
 	private String nome;
-	
+
 	@NotEmpty
 	@Column(name = "data_hora_inicio")
 //	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
@@ -37,25 +37,25 @@ public class Evento {
 	@Column(name = "data_hora_fim")
 //	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
 	private String dataHoraFim;
-	
+
 	@Size(max = 255)
 	@Column(name = "descricao")
 	private String descricaoEvento;
 
 	@Column(name = "is_privado")
 	private boolean isPrivado;
-	
+
 	private String senha;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@NotEmpty
 	private Categoria categoria;
 
 	@NotEmpty
 	@OneToOne
-	@JoinColumn(name="idEndereco")
+	@JoinColumn(name = "idEndereco")
 	private Endereco endereco;
-	
+
 	public Evento() {
 	}
 

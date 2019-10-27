@@ -30,17 +30,10 @@ public class GravaArquivo {
 		try {
 			for (int i=0; i < lista.getTamanho(); i++) {
 				Evento a = lista.getElemento(i);
-				// Grava os atributos do objeto aluno no arquivo
-				// O %n indica que será gravado um fim de registro
-				// No Windows, o fim de registro é um \r\n
-				// No Linux e no MacOS, o fim de registro é um \n
-				
-					saida.format("%d;%s;%s;%s;%s;%s;%n",a.getIdEvento()
+					saida.format("%d;%s;%s;%s;%n",a.getIdEvento()
 												  ,a.getNome()
 												  ,a.getDataHoraInicio()
-												  ,a.getDataHoraFim()
-												  ,a.getCategoria()
-												  ,a.getEndereco());
+												  ,a.getDataHoraFim());
 			}
 		}
 		catch (FormatterClosedException erro )
