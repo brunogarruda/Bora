@@ -3,9 +3,7 @@ package br.com.bandtec.bora.core.model;
 
 import lombok.*;
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -15,6 +13,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "tbd_evento")
 public class Evento implements AbstractEntity {
 
 	@Id

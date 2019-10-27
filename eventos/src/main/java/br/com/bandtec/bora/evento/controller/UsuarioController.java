@@ -1,7 +1,6 @@
 package br.com.bandtec.bora.evento.controller;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.bandtec.bora.core.model.Usuario;
 import br.com.bandtec.bora.evento.model.dto.CadastrarUsuario;
 import br.com.bandtec.bora.evento.model.service.UsuarioService;
@@ -26,11 +24,12 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioController {
 
 	private final UsuarioService service;
-	
+
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Iterable<Usuario>> list(Pageable pageable) {
-		return new ResponseEntity<>(service.buscarUsuarios(pageable), HttpStatus.OK);
+	return new ResponseEntity<>(service.buscarUsuarios(pageable), HttpStatus.OK);
 	}
+	
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<CadastrarUsuario> cadastrarUsuario(@Valid @RequestBody CadastrarUsuario cadastrarUsuario) {
@@ -39,10 +38,10 @@ public class UsuarioController {
 	}
 
 	// @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	// public ResponseEntity<Usuario> cadastrarUsuario(@Valid @RequestBody Usuario usuario) {
-	// 	service.cadastrar(usuario);
-	// 	return ResponseEntity.ok().build();
+	// public ResponseEntity<Usuario> cadastrarUsuario(@Valid @RequestBody Usuario
+	// usuario) {
+	// service.cadastrar(usuario);
+	// return ResponseEntity.ok().build();
 	// }
 
-	
 }

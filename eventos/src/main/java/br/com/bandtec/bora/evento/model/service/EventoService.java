@@ -2,6 +2,7 @@ package br.com.bandtec.bora.evento.model.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.bandtec.bora.core.repository.EventoRepositorio;

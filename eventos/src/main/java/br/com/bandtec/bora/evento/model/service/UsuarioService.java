@@ -1,8 +1,14 @@
 package br.com.bandtec.bora.evento.model.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +25,14 @@ public class UsuarioService {
 
 	private final UsuarioRepositorio usuarioRepositorio;
 
+	@Cacheable(value = "usersCache")
 	public Iterable<Usuario> buscarUsuarios(Pageable pageable) {
-		log.info("Listing all eventos");
-		return usuarioRepositorio.findAll();
+		log.info("Listing all usuario");
+		return usuarioRepositorio.findAll(pageable);
 	}
 
 	@Transactional
-	public void cadastrarUsuario(CadastrarUsuario cadastrarUsuario){
+	public void cadastrarUsuario(CadastrarUsuario cadastrarUsuario) {
 		Usuario usuario = new Usuario();
 		usuarioRepositorio.save(usuario);
 		usuario.setApelido(cadastrarUsuario.getUsuario().getApelido());
@@ -35,8 +42,8 @@ public class UsuarioService {
 	}
 
 	// public Usuario cadastrar(Usuario usuario) {
-	// 	System.out.println(usuario);
-	// 	return usuarioRepositorio.save(usuario);
+	// System.out.println(usuario);
+	// return usuarioRepositorio.save(usuario);
 	// }
-	
+
 }

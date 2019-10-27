@@ -14,7 +14,8 @@ import javax.validation.constraints.NotNull;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Usuario implements AbstractEntity{
+@Table(name = "tbd_usuario")
+public class Usuario implements AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +27,6 @@ public class Usuario implements AbstractEntity{
 	@NotNull(message = "Preenchimento Obrigatorio")
 	@Column(nullable = false)
 	private String apelido;
-
 
 	@NotNull(message = "Preenchimento obrigatorio")
 	@Column(nullable = false)
