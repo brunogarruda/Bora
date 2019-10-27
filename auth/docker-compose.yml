@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  auth:
+    image: auth
+    build: .
+    ports:
+      - 8083:8083

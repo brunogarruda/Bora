@@ -2,6 +2,7 @@ package br.com.bandtec.bora.evento.controller;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.trace.http.HttpTrace.Request;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,13 +27,21 @@ public class UsuarioController {
 	private final UsuarioService service;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Iterable<Usuario>> list(Pageable pageable) {
-		return new ResponseEntity<>(service.buscarUsuarios(pageable), HttpStatus.OK);
+	public ResponseEntity<Iterable<Usuario>> list(Pageable pageable) throws Exception {
+		Iterable<Usuario> usuario = service.buscarUsuarios(pageable);
+		if (usuario == null)
+			ResponseEntity.noContent().build();
+
+		return ResponseEntity.ok(usuario);
+
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<CadastrarUsuario> cadastrarUsuario(@Valid @RequestBody CadastrarUsuario cadastrarUsuario) {
 		service.cadastrarUsuario(cadastrarUsuario);
+		if (cadastrarUsuario == null)
+			ResponseEntity.badRequest().build();
+
 		return ResponseEntity.ok().build();
 	}
 

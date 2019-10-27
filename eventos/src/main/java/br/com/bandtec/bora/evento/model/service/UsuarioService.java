@@ -26,9 +26,14 @@ public class UsuarioService {
 	private final UsuarioRepositorio usuarioRepositorio;
 
 	@Cacheable(value = "boraCache")
-	public Iterable<Usuario> buscarUsuarios(Pageable pageable) {								
+	public Iterable<Usuario> buscarUsuarios(Pageable pageable) throws Exception {
+		Iterable<Usuario> usuario = usuarioRepositorio.findAll(pageable);
 		log.info("Listing all usuario");
-		return usuarioRepositorio.findAll(pageable);
+
+		if (usuario == null)
+			throw new Exception("Nenhum usuario encontrado");
+
+		return usuario;
 	}
 
 	@Transactional

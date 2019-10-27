@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  eventos:
+    image: eventos
+    build: .
+    ports:
+      - 8082:8082
