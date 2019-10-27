@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private static final class CustomUserDetails extends Usuario implements UserDetails {
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 8327797172982120495L;
 
