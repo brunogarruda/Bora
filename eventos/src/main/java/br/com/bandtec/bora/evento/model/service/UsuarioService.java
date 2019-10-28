@@ -1,13 +1,14 @@
 package br.com.bandtec.bora.evento.model.service;
 
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import br.com.bandtec.bora.core.model.Usuario;
 import br.com.bandtec.bora.core.repository.UsuarioRepositorio;
 import br.com.bandtec.bora.evento.model.dto.CadastrarUsuario;
@@ -16,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-@Transactional
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @CacheConfig(cacheNames = "boraCache")
 public class UsuarioService {
@@ -33,13 +33,17 @@ public class UsuarioService {
         return usuarioRepositorio.findAll(pageable);
     }
 
-    // @Transactional
+    @Transactional
     public void cadastrarUsuario(CadastrarUsuario cadastrarUsuario) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        log.info("cadastrado iniciado");
+
         Usuario usuario = new Usuario();
+        usuario.setApelido(cadastrarUsuario.getApelido());
+        usuario.setCodigoUsuario(cadastrarUsuario.getCodigoUsuario());
+        usuario.setSenha(passwordEncoder.encode(cadastrarUsuario.getSenha()));
         usuarioRepositorio.save(usuario);
-        usuario.setApelido(cadastrarUsuario.getUsuario().getApelido());
-        usuario.setSenha(cadastrarUsuario.getUsuario().getSenha());
-        usuario.setRole(cadastrarUsuario.getUsuario().getRole());
-        System.out.println(usuario);
+
+        log.info("usuario cadastrado, {}", usuario);
     }
 }

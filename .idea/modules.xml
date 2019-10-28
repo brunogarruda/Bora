@@ -7,8 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/bora-backend.iml" filepath="$PROJECT_DIR$/.idea/bora-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/discovery/discovery.iml" filepath="$PROJECT_DIR$/discovery/discovery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eventos/eventos.iml" filepath="$PROJECT_DIR$/eventos/eventos.iml" />
       <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
-      <module fileurl="file://$PROJECT_DIR$/token/token.iml" filepath="$PROJECT_DIR$/token/token.iml" />
     </modules>
   </component>
 </project>

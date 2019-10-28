@@ -13,7 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * EhCacheConfiguration
  */
 
-@EnableJpaRepositories(basePackages = "br.com.bandtec.core.repository")
 @EnableCaching
 @Configuration
 public class EhCacheConfiguration {

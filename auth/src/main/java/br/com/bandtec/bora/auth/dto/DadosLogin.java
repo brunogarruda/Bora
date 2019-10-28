@@ -1,4 +1,4 @@
-package br.com.bandtec.bora.evento.model.dto;
+package br.com.bandtec.bora.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class CadastrarUsuario {
-
+@NoArgsConstructor
+public class DadosLogin {
     private String apelido;
-    private String codigoUsuario;
     private String senha;
 }

@@ -20,7 +20,7 @@ import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/v1/admin/usuarios")
+@RequestMapping("/nenhuma")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Api(value = "Endpoints para gerenciar usuarios")
 public class UsuarioController {
@@ -41,9 +41,6 @@ public class UsuarioController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<CadastrarUsuario> cadastrarUsuario(@Valid @RequestBody CadastrarUsuario cadastrarUsuario) {
         service.cadastrarUsuario(cadastrarUsuario);
-        if (cadastrarUsuario == null)
-            ResponseEntity.badRequest().build();
-
         return ResponseEntity.ok().build();
     }
 

@@ -13,12 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Builder
 @Table(name = "tbd_evento")
 @Entity
-public class Evento implements AbstractEntity {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 2841106963046964316L;
+public class Evento{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
