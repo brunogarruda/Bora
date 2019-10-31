@@ -1,0 +1,10 @@
+br\com\bandtec\bora\evento\config\EhCacheConfiguration.class
+br\com\bandtec\bora\evento\model\dto\CadastrarUsuario$CadastrarUsuarioBuilder.class
+br\com\bandtec\bora\evento\BoraApplication.class
+br\com\bandtec\bora\evento\controller\EventoController.class
+br\com\bandtec\bora\evento\model\service\UsuarioService.class
+br\com\bandtec\bora\evento\model\dto\CadastrarUsuario.class
+br\com\bandtec\bora\evento\model\dto\CadastrarEvento.class
+br\com\bandtec\bora\evento\model\service\EventoService.class
+br\com\bandtec\bora\evento\docs\SwaggerConfig.class
+br\com\bandtec\bora\evento\controller\UsuarioController.class

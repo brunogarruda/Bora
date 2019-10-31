@@ -1,0 +1,15 @@
+br\com\bandtec\bora\core\model\Usuario.class
+br\com\bandtec\bora\core\model\UsuarioEvento$UsuarioEventoBuilder.class
+br\com\bandtec\bora\core\model\Categoria.class
+br\com\bandtec\bora\core\model\Usuario$UsuarioBuilder.class
+br\com\bandtec\bora\core\model\Evento$EventoBuilder.class
+br\com\bandtec\bora\core\repository\EventoRepositorio.class
+br\com\bandtec\bora\core\repository\UsuarioRepositorio.class
+br\com\bandtec\bora\core\model\SubCategoria$SubCategoriaBuilder.class
+br\com\bandtec\bora\core\model\Endereco$EnderecoBuilder.class
+br\com\bandtec\bora\core\model\SubCategoria.class
+br\com\bandtec\bora\core\docs\BaseSwaggerConfig.class
+br\com\bandtec\bora\core\model\UsuarioEvento.class
+br\com\bandtec\bora\core\model\Endereco.class
+br\com\bandtec\bora\core\model\Categoria$CategoriaBuilder.class
+br\com\bandtec\bora\core\model\Evento.class

@@ -13,7 +13,7 @@ public class TokenService {
     //30 minutos
     static final long EXPIRATION_TIME = 1800000;
     static final String SECRET = "MySecret";
-    static final String TOKEN_PREFIX = "Bearer";
+    static final String TOKEN_PREFIX = "Bearer ";
     static final String HEADER_STRING = "Authorization";
 
 

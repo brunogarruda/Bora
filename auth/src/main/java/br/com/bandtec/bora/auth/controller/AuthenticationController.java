@@ -13,8 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.servlet.ServletException;
 import java.util.Date;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/v1/api/login")
@@ -22,6 +26,7 @@ import java.util.Date;
 @Api(value = "Endpoints para autenticar usuario")
 public class AuthenticationController {
     private final UserAuthenticationService service;
+    
 
     @PostMapping
     public String autenticar(@RequestBody DadosLogin dadosLogin) throws ServletException {
@@ -34,10 +39,17 @@ public class AuthenticationController {
         if (usuario==null)
             throw new ServletException("Usuario nao encontrado");
 
+            
         jwtToken = Jwts.builder()
             .setSubject(dadosLogin.getApelido()).claim("roles","user").setIssuedAt(new Date())
             .signWith(SignatureAlgorithm.HS256,"secretKey").compact();
 
         return jwtToken;
     }
+
+    @GetMapping
+    public String getMethodName() {
+        return "hello world";
+    }
+    
 }
