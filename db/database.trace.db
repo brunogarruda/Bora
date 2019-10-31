@@ -1236,3 +1236,9 @@ select * from tbd_evento e INNER JOIN tbd_categoria on c.id_categoria = e.catego
 	at org.h2.server.web.WebThread.process(WebThread.java:173)
 	at org.h2.server.web.WebThread.run(WebThread.java:93)
 	at java.lang.Thread.run(Unknown Source)
+2019-10-30 19:44:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EVENTO" not found; SQL statement:
+select e from Evento e INNER JOIN Categoria c on c.idCategoria = e.idCategoria INNER JOIN SubCategoria sc on sc.idSubCategoria = c.idSubCategoria where sc.nome = nome [42102-199]
+2019-10-30 20:28:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TBD_EVENTO" not found; SQL statement:
+select evento0_.id_evento as id_event1_2_0_, categoria1_.id_categoria as id_categ1_0_1_, subcategor2_.id_sub_categoria as id_sub_c1_4_2_, evento0_.data_hora_fim as data_hor2_2_0_, evento0_.data_hora_inicio as data_hor3_2_0_, evento0_.descricao as descrica4_2_0_, evento0_.endereco_id_fk as endereco8_2_0_, evento0_.categoria_id_fk as categori9_2_0_, evento0_.is_privado as is_priva5_2_0_, evento0_.nome_evento as nome_eve6_2_0_, evento0_.organizador_id_fk as organiz10_2_0_, evento0_.senha as senha7_2_0_, categoria1_.nome_categoria as nome_cat2_0_1_, subcategor2_.categoria_id_fk as categori3_4_2_, subcategor2_.nome_sub_categoria as nome_sub2_4_2_ from tbd_evento evento0_ cross join tbd_categoria categoria1_ cross join tbd_sub_categoria subcategor2_ where categoria1_.id_categoria=subcategor2_.id_sub_categoria and evento0_.id_evento=categoria1_.id_categoria and evento0_.id_evento=subcategor2_.id_sub_categoria and subcategor2_.nome_sub_categoria=? [42102-199]

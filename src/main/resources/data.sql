@@ -10,7 +10,14 @@ INSERT INTO TBD_ENDERECO (BAIRRO, CEP, CIDADE, ESTADO, NUMERO, RUA) VALUES ('Jd.
 INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ENDERECO_ID_FK , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_FK ) VALUES (15,16,'Fut de sabadao',1,0,'FUTEBAS',1);
 INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ENDERECO_ID_FK , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_FK ) VALUES (15,16,'Festinha nada social',1,0,'Baladinha black',1);
 
-
+/*
+ select * from tbd_evento e
+INNER JOIN tbd_categoria c
+on e.categoria_id_fk = c.id_categoria
+INNER JOIN tbd_sub_categoria sc
+on c.categoria_id_fk = sc.id_sub_categoria 
+where sc.nome_sub_categoria = 'Futebol';
+ */
 
 INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Futebol',1);
 INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Volei',1);
