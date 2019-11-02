@@ -16,7 +16,7 @@ INNER JOIN tbd_categoria c
 on e.categoria_id_fk = c.id_categoria
 INNER JOIN tbd_sub_categoria sc
 on c.categoria_id_fk = sc.id_sub_categoria 
-where sc.nome_sub_categoria = 'Futebol';
+where nome_sub_categoria = 'Futebol';
  */
 
 INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Futebol',1);
