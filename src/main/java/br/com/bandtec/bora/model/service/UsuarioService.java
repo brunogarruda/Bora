@@ -32,4 +32,14 @@ public class UsuarioService {
 	public void deletarUsuario(Long idUsuario) {
 		usuarioRepositorio.deleteById(idUsuario);
 	}
+	
+	public Usuario buscarUsuarioPorNome(String login) {
+		
+		Usuario usuario = usuarioRepositorio.findByApelido(login);
+		
+		if(usuario == null) {
+			usuario = usuarioRepositorio.findByEmail(login);
+		}
+		return usuario;
+	}
 }

@@ -28,7 +28,7 @@ public class UsuarioController {
 	/*
 	 * Para cadastrar um usuario
 	 */
-	
+
 	@PostMapping("/usuarios")
 	public ResponseEntity<Usuario> criarUsuario(@Valid @RequestBody Usuario usuario) {
 		return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuario));
@@ -47,16 +47,24 @@ public class UsuarioController {
 	 * Para buscar usuarios cadastrados pelo idUsuario
 	 */
 
-	@GetMapping("usuarios/{id}")
-	public ResponseEntity<Usuario> buscarUsuarioPeloIdUsuario(@PathVariable(value = "id") Long idUsuario) {
-		Usuario buscarUsuario = usuarioService.buscarUsuarioPeloIdUsuario(idUsuario);
+//	@GetMapping("usuarios/{id}")
+//	public ResponseEntity<Usuario> buscarUsuarioPeloIdUsuario(@PathVariable(value = "id") Long idUsuario) {
+//		Usuario buscarUsuario = usuarioService.buscarUsuarioPeloIdUsuario(idUsuario);
+//
+//		if (buscarUsuario == null) {
+//			throw new DomainException("Usuario não encontrado");
+//		}
+//
+//		return ResponseEntity.ok(usuarioService.buscarUsuarioPeloIdUsuario(idUsuario));
+//
+//	}
 
-		if (buscarUsuario == null) {
-			throw new DomainException("Usuario não encontrado");
-		}
-
-		return ResponseEntity.ok(usuarioService.buscarUsuarioPeloIdUsuario(idUsuario));
-
+	@GetMapping("usuarios/{login}")
+	public ResponseEntity<Usuario> bucarUsuarioPeloLogin(@PathVariable(value = "login") String login) {
+		
+		Usuario usuario = usuarioService.buscarUsuarioPorNome(login);
+		
+		return ResponseEntity.ok().body(usuario);
 	}
 //
 //	/*
@@ -83,10 +91,10 @@ public class UsuarioController {
 	/*
 	 * Deletar um usuario
 	 */
-	
+
 	@DeleteMapping("usuarios/{idUsuario}")
 	public void deletarUsuario(@PathVariable(value = "idUsuario") Long idUsuario) {
-		 usuarioService.deletarUsuario(idUsuario);
+		usuarioService.deletarUsuario(idUsuario);
 	}
 
 }

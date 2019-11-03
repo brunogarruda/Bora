@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.bandtec.bora.model.dto.CadastrarEvento;
@@ -43,6 +44,10 @@ public class EventoService {
 
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
+	}
+	
+	public List<Evento> buscarEventosHome(){
+		return eventoRepositorio.findForHome(new PageRequest(0, 8));
 	}
 
 

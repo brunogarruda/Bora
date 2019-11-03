@@ -21,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
 
@@ -37,16 +38,20 @@ public class Usuario implements UserDetails {
 	private Long idUsuario;
 
 	@Size(min = 2)
+	@JsonProperty
 	private String nome;
 
 	@Column(unique = true, length = 50)
 	@Size(min = 5)
+	@JsonProperty
 	private String apelido;
 
 	@Email
+	@JsonProperty
 	private String email;
 
 	@NotEmpty
+	@JsonProperty
 	private String celular;
 
 	@NotEmpty

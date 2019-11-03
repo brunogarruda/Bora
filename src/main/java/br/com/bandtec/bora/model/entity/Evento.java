@@ -85,7 +85,6 @@ public class Evento {
 		this.senha = senha;
 		this.categoria = categoria;
 		this.endereco = endereco;
-//		this.organizador = organizador;
 	}
 
 	public Long getIdEvento() {
