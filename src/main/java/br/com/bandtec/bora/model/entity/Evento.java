@@ -55,8 +55,8 @@ public class Evento {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@NotEmpty
-	@JoinColumn(name="categoria_id_fk")
-	private Categoria idCategoria;
+	@JoinColumn(name="sub_categoria_id_fk")
+	private SubCategoria subcategoriaIdFk;
 
 	@NotEmpty
 	@OneToOne
@@ -72,9 +72,25 @@ public class Evento {
 	public Evento() {
 	}
 
+//	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty String dataHoraInicio,
+//			String dataHoraFim, @Size(max = 255) String descricao, boolean isPrivado, String senha,
+//			@NotEmpty Categoria idCategoria, @NotEmpty Endereco endereco, UsuarioEvento organizador) {
+//		this.idEvento = idEvento;
+//		this.nome = nome;
+//		this.dataHoraInicio = dataHoraInicio;
+//		this.dataHoraFim = dataHoraFim;
+//		this.descricaoEvento = descricao;
+//		this.isPrivado = isPrivado;
+//		this.senha = senha;
+//		this.idCategoria = idCategoria;
+//		this.endereco = endereco;
+//     	this.organizador = organizador;
+//	}	
+	
+	
 	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty String dataHoraInicio,
 			String dataHoraFim, @Size(max = 255) String descricao, boolean isPrivado, String senha,
-			@NotEmpty Categoria idCategoria, @NotEmpty Endereco endereco, UsuarioEvento organizador) {
+			@NotEmpty SubCategoria subcategoriaIdFk, @NotEmpty Endereco endereco, UsuarioEvento organizador) {
 		this.idEvento = idEvento;
 		this.nome = nome;
 		this.dataHoraInicio = dataHoraInicio;
@@ -82,7 +98,7 @@ public class Evento {
 		this.descricaoEvento = descricao;
 		this.isPrivado = isPrivado;
 		this.senha = senha;
-		this.idCategoria = idCategoria;
+		this.subcategoriaIdFk = subcategoriaIdFk;
 		this.endereco = endereco;
      	this.organizador = organizador;
 	}	

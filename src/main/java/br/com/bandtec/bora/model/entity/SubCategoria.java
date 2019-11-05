@@ -1,5 +1,7 @@
 package br.com.bandtec.bora.model.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -30,19 +33,32 @@ public class SubCategoria {
 	@Column(name = "nome_sub_categoria")
 	private String nome;
 	
+/*	@ManyToOne
+	@JoinColumn(name = "categoria_id_fk")
+	@NotEmpty
+	private Categoria categoriaIdFk; */
+	
 	@ManyToOne
 	@JoinColumn(name = "categoria_id_fk")
 	@NotEmpty
 	private Categoria categoriaIdFk;
 	
+	@OneToMany(mappedBy = "subcategoriaIdFk")
+	private List<Evento> eventos;
 	
-
+	
 	public SubCategoria() {
 	}
 
-	public SubCategoria(Long idSubCategoria, String nome, @NotEmpty Categoria categoriaIdFk) {
+//	public SubCategoria(Long idSubCategoria, String nome, @NotEmpty Categoria categoriaIdFk) {
+//		this.idSubCategoria = idSubCategoria;
+//		this.nome = nome;
+//		this.categoriaIdFk = categoriaIdFk;
+//	}
+	
+	public SubCategoria(Long idSubCategoria, String nome, @NotEmpty List<Evento> eventos) {
 		this.idSubCategoria = idSubCategoria;
 		this.nome = nome;
-		this.categoriaIdFk = categoriaIdFk;
-	}
+		this.eventos = eventos;
+    }
 }

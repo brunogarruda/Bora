@@ -33,11 +33,11 @@ public class Categoria {
 	@Column(name = "nome_categoria",unique = true)
 	private String nomeCategoria;
 
-	@OneToMany(mappedBy = "idCategoria")
-	private List<Evento> eventos;
+/*	@OneToMany(mappedBy = "idCategoria")
+	private List<Evento> eventos; */
 	
 	@OneToMany(mappedBy = "categoriaIdFk")
-	private List<SubCategoria> idSubCategoria;
+	private List<SubCategoria> subcategorias;
 
 	public Categoria() {
 	}
@@ -46,10 +46,16 @@ public class Categoria {
 		this.idCategoria = idCategoria;
 	}
 
-	public Categoria(Long idCategoria, @NotEmpty String nomeCategoria, List<Evento> eventos) {
+//	public Categoria(Long idCategoria, @NotEmpty String nomeCategoria, List<Evento> eventos) {
+//		this.idCategoria = idCategoria;
+//		this.nomeCategoria = nomeCategoria;
+////		this.eventos = eventos;
+//	}
+	
+	public Categoria(Long idCategoria, @NotEmpty String nomeCategoria, List<SubCategoria> subcategorias) {
 		this.idCategoria = idCategoria;
 		this.nomeCategoria = nomeCategoria;
-//		this.eventos = eventos;
+		this.subcategorias = subcategorias;
 	}
 
 
