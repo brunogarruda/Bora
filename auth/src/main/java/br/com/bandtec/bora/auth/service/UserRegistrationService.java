@@ -20,6 +20,7 @@ public class UserRegistrationService {
         Usuario usuario = new Usuario();
         usuario.setNome(userRegistrationDTO.getNome());
         usuario.setApelido(userRegistrationDTO.getApelido());
+        usuario.setCelular(userRegistrationDTO.getCelular());
         usuario.setSenha(userRegistrationDTO.getSenha());
         usuario.setEmail(userRegistrationDTO.getEmail());
 

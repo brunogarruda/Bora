@@ -13,20 +13,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EventoService {
-	private final EventoRepositorio eventoRepositorio;
+    private final EventoRepositorio eventoRepositorio;
 
-	public Iterable<Evento> buscarEventos(Pageable pageable) throws Exception {
-		log.info("Listing all eventos");
-		if (eventoRepositorio.findAll(pageable).isEmpty())
-			throw new Exception("Nenhum evento encontrado");
+    public Iterable<Evento> buscarEventos(Pageable pageable) throws Exception {
+        log.info("Listing all eventos");
+        if (eventoRepositorio.findAll(pageable).isEmpty())
+            throw new Exception("Nenhum evento encontrado");
 
-		return eventoRepositorio.findAll(Sort.by("nome"));
-	}
+        return eventoRepositorio.findAll(Sort.by("nome"));
+    }
 
-	public Evento buscarEventoPeloId(Long id) {
-		log.info("Listing eventos");
-		return eventoRepositorio.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Evento nao encontrado com o id:" + id));
-	}
+    public Evento buscarEventoPeloId(Long id) {
+        log.info("Listing eventos");
+        return eventoRepositorio.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Evento nao encontrado com o id:" + id));
+    }
 
+
+    public Evento cadastrarEvento(Evento evento) {
+        return eventoRepositorio.save(evento);
+    }
 }

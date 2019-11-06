@@ -30,6 +30,8 @@ public class Usuario {
 
     private String email;
 
+    private String celular;
+
     private String token;
 
     private String senha;
