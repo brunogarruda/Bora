@@ -53,8 +53,7 @@ public class Evento {
 	
 	private String senha;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@NotEmpty
+	@ManyToOne
 	@JoinColumn(name="sub_categoria_id_fk")
 	private SubCategoria subcategoriaIdFk;
 
@@ -101,7 +100,8 @@ public class Evento {
 		this.subcategoriaIdFk = subcategoriaIdFk;
 		this.endereco = endereco;
      	this.organizador = organizador;
-	}	
+	}
+	
 
 //	public UsuarioEvento getOrganizador() {
 //		return organizador;

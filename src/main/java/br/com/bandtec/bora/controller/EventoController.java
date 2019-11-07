@@ -44,11 +44,13 @@ public class EventoController {
 		return eventoService.buscarTodosEventos(evento);
 	}
 
-	@PutMapping("/{idEvento}")
+/*	
+    @PutMapping("/{idEvento}")
 	public ResponseEntity<Evento> atualizarEvento(@PathVariable(value = "idEvento") Long idEvento,
 			@Valid @RequestBody Evento evento) {
 		return ResponseEntity.ok(eventoService.atualizarEvento(idEvento, evento));
-	}
+	} 
+ */
 
 	@GetMapping("/{nomeEvento}")
 	public ResponseEntity<List<Evento>> buscarEventoPorNome(@PathVariable(value = "nomeEvento") String nomeEvento) {

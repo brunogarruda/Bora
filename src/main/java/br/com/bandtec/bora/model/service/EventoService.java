@@ -30,14 +30,14 @@ public class EventoService {
 	private CategoriaRepositorio categoriaRepositorio;
 
 	
-	public Evento atualizarEvento(Long idEvento, Evento evento) {
+/*	public Evento atualizarEvento(Long idEvento, Evento evento) {
 		evento.setIdEvento(idEvento);
 		evento.setNome(evento.getNome());
 		evento.setEndereco(evento.getEndereco());
-		evento.setIdCategoria(evento.getIdCategoria());
+		evento.setIdSubCategoria(evento.getSubcategoriaIdFk());
 		evento.setDataHoraInicio(evento.getDataHoraInicio());
 		return eventoRepositorio.save(evento);
-	}
+	} */
 
 	public List<Evento> buscarEventoPorNome(String nomeEvento) {
 		return (List<Evento>) eventoRepositorio.findByNome(nomeEvento);
@@ -63,7 +63,7 @@ public class EventoService {
 		Evento evento = new Evento();
 		usuario.setIdUsuario(cadastrarEvento.getUsuario().getIdUsuario());
 		
-		evento.setIdCategoria(cadastrarEvento.getEvento().getIdCategoria());
+	/*	evento.setIdCategoria(cadastrarEvento.getEvento().getIdCategoria()); */
 		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
 		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
 		evento.setNome(cadastrarEvento.getEvento().getNome());

@@ -1,3 +1,4 @@
 java -cp h2-1.4.199.jar org.h2.tools.Server
 
 jdbc:h2:file:./db/database;AUTO_SERVER=TRUE;
+
