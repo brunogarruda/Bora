@@ -2,8 +2,10 @@ package br.com.bandtec.bora.model.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -40,9 +46,9 @@ public class SubCategoria {
 	
 	@ManyToOne
 	@JoinColumn(name = "categoria_id_fk")
-	@NotEmpty
 	private Categoria categoriaIdFk;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "subcategoriaIdFk")
 	private List<Evento> eventos;
 	
@@ -56,7 +62,8 @@ public class SubCategoria {
 //		this.categoriaIdFk = categoriaIdFk;
 //	}
 	
-	public SubCategoria(Long idSubCategoria, String nome, @NotEmpty List<Evento> eventos) {
+	
+	public SubCategoria( Long idSubCategoria, String nome, @NotEmpty List<Evento> eventos) {
 		this.idSubCategoria = idSubCategoria;
 		this.nome = nome;
 		this.eventos = eventos;

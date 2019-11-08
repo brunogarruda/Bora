@@ -2,15 +2,21 @@ package br.com.bandtec.bora.model.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -35,9 +41,9 @@ public class Categoria {
 
 /*	@OneToMany(mappedBy = "idCategoria")
 	private List<Evento> eventos; */
-	
+	@JsonBackReference
 	@OneToMany(mappedBy = "categoriaIdFk")
-	private List<SubCategoria> subcategorias;
+	private List<SubCategoria> subcategoria;
 
 	public Categoria() {
 	}
@@ -51,11 +57,11 @@ public class Categoria {
 //		this.nomeCategoria = nomeCategoria;
 ////		this.eventos = eventos;
 //	}
-	
+	@Autowired
 	public Categoria(Long idCategoria, @NotEmpty String nomeCategoria, List<SubCategoria> subcategorias) {
 		this.idCategoria = idCategoria;
 		this.nomeCategoria = nomeCategoria;
-		this.subcategorias = subcategorias;
+		this.subcategoria = subcategorias;
 	}
 
 

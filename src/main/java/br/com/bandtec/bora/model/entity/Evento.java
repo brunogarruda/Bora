@@ -54,7 +54,7 @@ public class Evento {
 	private String senha;
 	
 	@ManyToOne
-	@JoinColumn(name="sub_categoria_id_fk")
+	@JoinColumn(name="sub_categoria_id_fk", referencedColumnName = "id_sub_categoria")
 	private SubCategoria subcategoriaIdFk;
 
 	@NotEmpty
@@ -62,8 +62,7 @@ public class Evento {
 	@JoinColumn(name="endereco_id_fk")
 	private Endereco endereco;
 
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@ManyToOne
 	@JoinColumn(name = "organizador_id_fk")
 	private UsuarioEvento organizador;
 
