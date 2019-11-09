@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -58,7 +59,8 @@ public class Usuario implements UserDetails {
 	private List<Evento> eventosCriados;
 	
 	@OneToMany
-	private List<UsuarioEvento> eventosQueParticipo;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<Evento> eventosQueParticipo;
 	
 	
 	public Usuario() {
