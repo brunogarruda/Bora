@@ -1,10 +1,9 @@
 br/com/bandtec/bora/core/model/Endereco.class
-br/com/bandtec/bora/core/model/UsuarioEvento$UsuarioEventoBuilder.class
-br/com/bandtec/bora/core/model/Evento$EventoBuilder.class
 br/com/bandtec/bora/core/model/SubCategoria$SubCategoriaBuilder.class
 br/com/bandtec/bora/core/model/Categoria.class
 br/com/bandtec/bora/core/model/Endereco$EnderecoBuilder.class
 br/com/bandtec/bora/core/model/Evento.class
+br/com/bandtec/bora/core/repository/UsuarioEventoRepositorio.class
 br/com/bandtec/bora/core/model/SubCategoria.class
 br/com/bandtec/bora/core/repository/EventoRepositorio.class
 br/com/bandtec/bora/core/model/UsuarioEvento.class

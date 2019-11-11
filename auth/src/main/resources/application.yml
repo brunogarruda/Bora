@@ -13,8 +13,6 @@ spring:
     application:
         name: auth
 
-
-
     jpa:
         show-sql: false
         hibernate:

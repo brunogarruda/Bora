@@ -2,12 +2,13 @@ package br.com.bandtec.bora.core.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
-@Table(name = "tbd_usuario")
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "tbd_usuario")
 public class Usuario {
 
     @Id
@@ -15,17 +16,24 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Long idUsuario;
 
+    @Column(unique = true)
     private String apelido;
 
     private String nome;
 
+    @Column(unique = true)
     private String email;
 
     private String celular;
 
-    private String token;
-
     private String senha;
+
+    @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Evento> eventosOrganizados;
+
+    public Usuario(Long idUsuario) {
+        this.idUsuario=idUsuario;
+    }
 
     public Usuario(String nome, String apelido, String email, String celular, String senha) {
         this.nome=nome;
@@ -36,12 +44,5 @@ public class Usuario {
     }
 
 
-//    public Usuario(Usuario usuario) {
-//        this.idUsuario = usuario.getIdUsuario();
-//        this.apelido = usuario.getApelido();
-//        this.nome=usuario.getNome();
-//        this.email=usuario.getEmail();
-//        this.celular=usuario.getCelular();
-//        this.senha=usuario.getSenha();
-//    }
+
 }

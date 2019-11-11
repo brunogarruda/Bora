@@ -7,3 +7,4 @@
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/Categoria.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/repository/UsuarioRepositorio.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/Evento.java
+/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/repository/UsuarioEventoRepositorio.java
