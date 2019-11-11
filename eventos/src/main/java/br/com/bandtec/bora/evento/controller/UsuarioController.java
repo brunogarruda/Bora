@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/nenhuma")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Api(value = "Endpoints para gerenciar usuarios")
-public class UsuarioController {
+public class    UsuarioController {
 
     private final UsuarioService service;
 

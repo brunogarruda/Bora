@@ -1,8 +1,8 @@
 package br.com.bandtec.bora.auth.controller;
 
-import br.com.bandtec.bora.core.model.Usuario;
 import br.com.bandtec.bora.auth.dto.UserRegistrationDTO;
 import br.com.bandtec.bora.auth.service.UserRegistrationService;
+import br.com.bandtec.bora.core.model.Usuario;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
-
 @RestController
 @RequestMapping("/v1/api/usuarios")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -24,15 +23,9 @@ public class UserRegistrationController {
     private final UserRegistrationService service;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<UserRegistrationDTO> salvar(
+    public ResponseEntity<UserRegistrationDTO> cadastrarUsuario(
             @Valid @RequestBody UserRegistrationDTO userRegistrationDTO) {
-        service.cadastrar(userRegistrationDTO);
-        // if (service.cadastrar(userRegistrationDTO) == null)
-        //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("erro");
-
-        return ResponseEntity.ok().build();
+        Usuario usuario = service.salvar(userRegistrationDTO.cadastrar());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
-
 }

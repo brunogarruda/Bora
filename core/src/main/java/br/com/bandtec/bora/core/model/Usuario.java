@@ -1,28 +1,19 @@
 package br.com.bandtec.bora.core.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
-
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "tbd_usuario")
 @Entity
-@Builder
-@Data
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     @Column(name = "id_usuario")
     private Long idUsuario;
-
-    private String codigoUsuario;
 
     private String apelido;
 
@@ -35,4 +26,22 @@ public class Usuario {
     private String token;
 
     private String senha;
+
+    public Usuario(String nome, String apelido, String email, String celular, String senha) {
+        this.nome=nome;
+        this.apelido=apelido;
+        this.email=email;
+        this.celular=celular;
+        this.senha=senha;
+    }
+
+
+//    public Usuario(Usuario usuario) {
+//        this.idUsuario = usuario.getIdUsuario();
+//        this.apelido = usuario.getApelido();
+//        this.nome=usuario.getNome();
+//        this.email=usuario.getEmail();
+//        this.celular=usuario.getCelular();
+//        this.senha=usuario.getSenha();
+//    }
 }

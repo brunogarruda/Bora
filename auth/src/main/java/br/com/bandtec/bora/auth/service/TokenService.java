@@ -4,29 +4,39 @@ import br.com.bandtec.bora.core.model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
+@Service
 public class TokenService {
-    //30 minutos
-    static final long EXPIRATION_TIME = 1800000;
-    static final String SECRET = "MySecret";
-    static final String TOKEN_PREFIX = "Bearer ";
-    static final String HEADER_STRING = "Authorization";
+
+    @Value("${forum.jwt.expiration}")
+    private String expiration;
+
+    @Value("${forum.jwt.secret}")
+    private String secret;
+
+    public String geraToken(Usuario usuario){
+        Date hoje = new Date();
+        Date dataExpiracao = new Date(hoje.getTime()+ Long.parseLong(expiration));
 
 
-    static void addAuthentication(HttpServletResponse response, String username) {
-        String JWT = Jwts.builder()
-            .setSubject(username)
-            .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-            .signWith(SignatureAlgorithm.HS512, SECRET)
+        return Jwts.builder()
+            .setIssuer("API Bora")
+            .setSubject(usuario.getApelido())
+            .claim("roles","user")
+            .setIssuedAt(hoje)
+            .setExpiration(dataExpiracao)
+            .signWith(SignatureAlgorithm.HS256, secret)
             .compact();
-
-        response.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
     }
 
-
+    public Claims decodeToken(String token){
+        return Jwts.parser()
+            .setSigningKey(secret)
+            .parseClaimsJws(token)
+            .getBody();
+    }
 
 }

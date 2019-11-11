@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class DadosLogin {
-    private String apelido;
-    private String senha;
+@AllArgsConstructor
+public class TokenDTO {
+    private String token;
+    private String tipo;
 }
