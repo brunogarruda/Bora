@@ -51,10 +51,18 @@ public class UsuarioService {
 		
 		for(int i = 0; i<usuarioEvento.size(); i++) {
 			Evento evento = eventoRepositorio.findById(usuarioEvento.get(i).getEvento().getIdEvento().longValue()).orElse(null);
-			eventos.add(evento);
+			
+			if (evento != null) {
+				eventos.add(evento);
+			}
 		}
 		
-		usuario.setEventosQueParticipo(eventos);
+		if(eventos.isEmpty()) {
+			usuario.setEventosQueParticipo(null);
+		}else {
+			usuario.setEventosQueParticipo(eventos);
+		}
+		 
 		return usuario;
 	}
 
@@ -66,7 +74,7 @@ public class UsuarioService {
 	public Usuario buscarUsuarioPeloNome(String apelido) throws Exception {
 		Usuario usuario = usuarioRepositorio.findByApelido(apelido);
 		if (usuario == null) {
-			
+			throw new Exception("Usuario Não Encontrado");
 		}
 		return usuario;
 	}

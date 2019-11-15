@@ -11,4 +11,6 @@ public interface UsuarioEventoRepositorio extends JpaRepository<UsuarioEvento, L
 
 	List<UsuarioEvento> findByUsuario_idUsuario(Long idUsuario);
 
+	List<UsuarioEvento> findByEvento_idEvento(Long idEvento);
+
 }

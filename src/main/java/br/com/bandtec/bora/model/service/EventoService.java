@@ -1,5 +1,6 @@
 package br.com.bandtec.bora.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -14,12 +15,16 @@ import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
 import br.com.bandtec.bora.repository.EventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
+import br.com.bandtec.bora.repository.UsuarioRepositorio;
 
 @Service
 public class EventoService {
 
 	@Autowired
 	private EventoRepositorio eventoRepositorio;
+	
+	@Autowired
+	private UsuarioRepositorio usuarioRepositorio;
 
 	@Autowired
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
@@ -50,12 +55,12 @@ public class EventoService {
 	}	
 	
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
-		evento.setIdEvento(idEvento);
-		evento.setNome(evento.getNome());
-		evento.setEndereco(evento.getEndereco());
-		evento.setCategoria(evento.getCategoria());
-		evento.setDataHoraInicio(evento.getDataHoraInicio());
-		return eventoRepositorio.save(evento);
+		Evento eventoAtualizado = eventoRepositorio.findById(idEvento).orElse(null);
+		eventoAtualizado.setNome(evento.getNome());
+		eventoAtualizado.setEndereco(evento.getEndereco());
+		eventoAtualizado.setCategoria(evento.getCategoria());
+		eventoAtualizado.setDataHoraInicio(evento.getDataHoraInicio());
+		return eventoRepositorio.save(eventoAtualizado);
 	}
 	
 	public Evento entrarEvento(Long idEvento, Usuario usuario) {
@@ -85,6 +90,24 @@ public class EventoService {
 		if (evento == null) {
 			throw new Exception("Evento não encontrado");
 		}
+		
+		List<UsuarioEvento> usuarioEvento = usuarioEventoRepositorio.findByEvento_idEvento(idEvento);
+		List<Usuario> participantes = new ArrayList<Usuario>();
+		
+		for(int i = 0; i<usuarioEvento.size(); i++) {
+			Usuario usuario = usuarioEvento.get(i).getUsuario();
+			
+			if (usuario != null) {
+				participantes.add(usuario);
+			}
+		}
+		
+		if(participantes.isEmpty()) {
+			evento.setParticipantes(null);
+		}else {
+			evento.setParticipantes(participantes);
+		}
+		
 		return evento;
 		
 	}
