@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import br.com.bandtec.bora.core.repository.EventoRepositorio;
 import br.com.bandtec.bora.core.model.Evento;
+import br.com.bandtec.bora.core.model.Usuario;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
