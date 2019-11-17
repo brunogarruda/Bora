@@ -60,7 +60,6 @@ public class Evento {
 	@JoinColumn(name="sub_categoria_id_fk", referencedColumnName = "id_sub_categoria")
 	private SubCategoria idSubCategoria;
 
-	@NotEmpty
 	@OneToOne
 	@JoinColumn(name="idEndereco")
 	private Endereco endereco;

@@ -54,10 +54,12 @@ public class EventoService {
 	
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
 		Evento eventoAtualizado = eventoRepositorio.findById(idEvento).orElse(null);
-		eventoAtualizado.setNome(evento.getNome());
-		eventoAtualizado.setEndereco(evento.getEndereco());
-		eventoAtualizado.setIdSubCategoria(evento.getIdSubCategoria());
-		eventoAtualizado.setDataHoraInicio(evento.getDataHoraInicio());
+		eventoAtualizado.setNome(evento.getNome() != null ? evento.getNome() : eventoAtualizado.getNome());
+		eventoAtualizado.setDescricaoEvento(evento.getDescricaoEvento() != null ? evento.getDescricaoEvento() : eventoAtualizado.getDescricaoEvento());
+		eventoAtualizado.setDataHoraInicio(evento.getDataHoraInicio() != null ? evento.getDataHoraInicio() : eventoAtualizado.getDataHoraInicio());
+		eventoAtualizado.setDataHoraFim(evento.getDataHoraFim() != null ? evento.getDataHoraFim() : eventoAtualizado.getDataHoraFim());
+		eventoAtualizado.setEndereco(evento.getEndereco() != null ? evento.getEndereco() : eventoAtualizado.getEndereco());
+		eventoAtualizado.setIdSubCategoria(evento.getIdSubCategoria() != null ? evento.getIdSubCategoria() : eventoAtualizado.getIdSubCategoria());
 		return eventoRepositorio.save(eventoAtualizado);
 	}
 	
