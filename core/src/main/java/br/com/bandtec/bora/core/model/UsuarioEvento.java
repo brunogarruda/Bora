@@ -2,6 +2,7 @@ package br.com.bandtec.bora.core.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 @Getter

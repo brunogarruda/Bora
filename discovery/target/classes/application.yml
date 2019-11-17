@@ -1,37 +1,13 @@
-#spring:
-#    application:
-#        name: registry
+spring:
+    application:
+        name: registry
 
 server:
-    port: 8761
+    port: 8081
 
 eureka:
-    numberRegistrySyncRetries: 1
-    instance:
-        preferIpAddress: false
-        hostname: localhost
     client:
         register-with-eureka: false
         fetch-registry: false
         service-url:
-            defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-    server:
-        enable-self-preservation: true
-
----
-
-spring:
-    profiles: docker
-
-eureka:
-    numberRegistrySyncRetries: 1
-    instance:
-        preferIpAddress: true
-        hostname: eureka-server
-    client:
-        register-with-eureka: false
-        fetch-registry: false
-        service-url:
-            defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-    server:
-        enable-self-preservation: false
+            defaultZone: http://localhost:8081/eureka/

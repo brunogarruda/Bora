@@ -1,10 +1,13 @@
-/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/SubCategoria.java
-/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/repository/EventoRepositorio.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/docs/BaseSwaggerConfig.java
-/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/Endereco.java
+/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/TipoDeCategoria.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/Usuario.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/UsuarioEvento.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/Categoria.java
+/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/repository/PesquisaRepositorio.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/repository/UsuarioRepositorio.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/Evento.java
 /home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/repository/UsuarioEventoRepositorio.java
+/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/repository/EventoRepositorio.java
+/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/repository/CategoriaRepositorio.java
+/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/Endereco.java
+/home/gesuvs/Documentos/Github/bora-backend/core/src/main/java/br/com/bandtec/bora/core/model/Pesquisa.java

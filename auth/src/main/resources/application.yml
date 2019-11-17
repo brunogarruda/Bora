@@ -6,7 +6,7 @@ eureka:
         prefer-ip-address: true
     client:
         service-url:
-            defaultZone: http://35.238.241.13:8761/eureka/
+            defaultZone: http://localhost:8081/eureka/
         register-with-eureka: true
 
 spring:

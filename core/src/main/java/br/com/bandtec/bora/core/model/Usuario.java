@@ -1,5 +1,6 @@
 package br.com.bandtec.bora.core.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
@@ -29,6 +30,7 @@ public class Usuario {
     private String senha;
 
     @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Evento> eventosOrganizados;
 
     public Usuario(Long idUsuario) {

@@ -6,49 +6,48 @@ POST - http://localhost:8080/api/eventos
 {
 	"usuario":"bruno",
 	"nome":"futsabado",
-	"categoria":"futebol",
+	"tipoDeCategoria":"futebol",
 	"qtdPessoa":"100",
 	"dataHora":"5",
     "endereco":"rua abril"
  }
- 
+
  //atualizar evento------------------------------------------------------
- 
+
  PUT - http://localhost:8080/api/eventos/{idEvento}
- 
+
  {
 	"usuario": "alterado",
 	"nome":"alterado",
-	"categoria":"alterado",
+	"tipoDeCategoria":"alterado",
 	"qtdPessoa":"150",
 	"dataHora":"10",
     "endereco":"alterado"
  }
- 
+
  //cadastrar usuario------------------------------------------------------
- 
+
  POST - http://localhost:8080/api/usuarios
- 
+
  {
 	"nome":"bruno",
 	"usuario":"bruno",
 	"celular":"12345678911",
     "senha":"123"
  }
- 
+
  //Buscar todos os usuários-----------------------------------------------
- 
+
  GET - http://localhost:8080/api/usuarios
- 
+
  //Buscar usuarios pelo ID------------------------------------------------
- 
+
  GET - http://localhost:8080/api/usuarios/{id}
- 
+
  //Deletar usuário pelo ID------------------------------------------------
- 
+
  DELETE - http://localhost:8080/api/usuarios/{id}
- 
+
  //BUSCAR TODAS AS CATEGORIAS---------------------------------------------
- 
- GET - http://localhost:8080/api/categoria
- 
+
+ GET - http://localhost:8080/api/tipoDeCategoria

@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class UserRegistrationDTO {
 
+    @Pattern(regexp = "^[a-zA-Z\\s]+", message = "{nome.not.valid}")
     private String nome;
 
     @NotEmpty(message = "{apelido.not.empty}")
