@@ -6,7 +6,7 @@ eureka:
         prefer-ip-address: true
     client:
         service-url:
-            defaultZone: http://localhost:8081/eureka/
+            defaultZone: http://35.238.241.13:8761/eureka/
         register-with-eureka: true
 
 spring:
@@ -14,24 +14,18 @@ spring:
         name: auth
 
     jpa:
-        show-sql: false
+        show-sql: true
         hibernate:
             ddl-auto: create-drop
-
     jmx:
         enabled: false
 
     datasource:
-        url: jdbc:h2:file:./db/database;AUTO_SERVER=TRUE
-        username: sa
-        password:
-        driver-class-name: org.h2.Driver
-        platform: h2
-
-    h2:
-        console:
-            enabled: true
-            path: /console
+        url: jdbc:sqlserver://projeto-bora.database.windows.net:1433;database=BoraDB;user=bora-project@projeto-bora;password=Projeto@bor;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+        username: bora-project
+        password: Projeto@bor
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        platform: mssql
 
 jwt:
     config:

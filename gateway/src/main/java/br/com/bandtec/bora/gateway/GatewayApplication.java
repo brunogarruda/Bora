@@ -19,3 +19,4 @@ public class GatewayApplication {
     }
 
 }
+//http://35.238.241.13:8761/

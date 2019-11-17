@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    labels:
+        name: eventos
+    name: eventos
+    namespace: default
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: eventos
+        spec:
+            containers:
+                - name: eventos
+                  image: gesuvs/bora-eventos:eventos
+                  ports:
+                      -   containerPort: 8087

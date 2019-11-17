@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    labels:
+        name: eureka
+    name: eureka
+    namespace: default
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: eureka
+        spec:
+            containers:
+                - name: discovery
+                  image: gesuvs/bora-discovery:discovery
+                  ports:
+                      -   containerPort: 8761

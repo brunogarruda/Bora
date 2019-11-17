@@ -31,8 +31,6 @@ public class Usuario {
     @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Evento> eventosOrganizados;
 
-    private List<Evento> eventosParticipado;
-
     public Usuario(Long idUsuario) {
         this.idUsuario=idUsuario;
     }
@@ -44,7 +42,4 @@ public class Usuario {
         this.celular=celular;
         this.senha=senha;
     }
-
-
-
 }

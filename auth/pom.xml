@@ -33,7 +33,7 @@
     </dependencies>
 
     <build>
-        <finalName>eventos</finalName>
+        <finalName>auth</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

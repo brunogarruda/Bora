@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    labels:
+        name: gateway
+    name: gateway
+    namespace: default
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: gateway
+        spec:
+            containers:
+                - name: gateway
+                  image: gesuvs/gateway:gateway
+                  ports:
+                      -   containerPort: 8080

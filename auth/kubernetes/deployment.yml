@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    labels:
+        name: auth
+    name: auth
+    namespace: default
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: auth
+        spec:
+            containers:
+                - name: auth
+                  image: gesuvs/bora-auth:auth
+                  ports:
+                      -   containerPort: 8083
