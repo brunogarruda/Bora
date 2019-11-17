@@ -16,5 +16,7 @@ public interface EventoRepositorio extends JpaRepository<Evento, Long>{
 	@Query("select e from Evento e order by e.idEvento desc")
 	List<Evento> findForHome(Pageable pageable);
 
+	List<Evento> findByIdSubCategoria_idSubCategoria(Long subcategoriaIdFk);
+
 //	List<Evento> findByOrganizador(String organizador); 
 }

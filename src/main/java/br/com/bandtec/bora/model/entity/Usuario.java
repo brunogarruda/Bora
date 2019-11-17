@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -59,6 +60,7 @@ public class Usuario implements UserDetails {
 	private List<Evento> eventosCriados;
 	
 	@OneToMany
+	@Transient
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Evento> eventosQueParticipo;
 	

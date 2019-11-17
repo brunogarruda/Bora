@@ -1,5 +1,7 @@
 package br.com.bandtec.bora.model.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,40 +9,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "TBD_SUB_CATEGORIA")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class SubCategoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_sub_categoria")
-	@JsonIgnore
-	private Long id;
-	
+	private Long idSubCategoria;
+
 	@Column(name = "nome_sub_categoria")
 	private String nome;
 	
 	@ManyToOne
-	@JoinColumn(name = "idCategoria")
+	@JoinColumn(name = "categoria_id_fk")
 	@NotEmpty
-	private Categoria categoria;
-	
+	private Categoria categoriaIdFk;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "idSubCategoria")
+	private List<Evento> eventos;
+
 	
 
 	public SubCategoria() {
 	}
-
-	public SubCategoria(Long id, String nome, @NotEmpty Categoria categoria) {
-		this.id = id;
+	
+	public SubCategoria(Long idSubCategoria, String nome, @NotEmpty Categoria categoriaIdFk, List<Evento> eventos) {
+		this.idSubCategoria = idSubCategoria;
 		this.nome = nome;
-		this.categoria = categoria;
-	}
+		this.categoriaIdFk = categoriaIdFk;
+		this.eventos = eventos;
+	}	
 }

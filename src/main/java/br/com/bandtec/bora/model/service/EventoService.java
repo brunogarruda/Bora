@@ -36,36 +36,36 @@ public class EventoService {
 	
 	@Transactional
 	public void cadastrarEvento(CadastrarEventoDTO cadastrarEvento) {
-		Usuario usuario = new Usuario();
+		Usuario usuario = usuarioRepositorio.findById(cadastrarEvento.getUsuario().getIdUsuario()).orElse(null);
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		Evento evento = new Evento();
-		usuario.setIdUsuario(cadastrarEvento.getUsuario().getIdUsuario());
 		
-		evento.setCategoria(cadastrarEvento.getEvento().getCategoria());
+		evento.setIdSubCategoria(cadastrarEvento.getEvento().getIdSubCategoria());
 		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
 		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
 		evento.setNome(cadastrarEvento.getEvento().getNome());
 		evento.setOrganizador(usuario);
 
-		usuarioEventoRepositorio.save(usuarioEvento);
 		usuarioEvento.setEvento(evento);
 		usuarioEvento.setUsuario(usuario);
 		usuarioEvento.setOrganizador(true);
-		
+		usuarioEventoRepositorio.save(usuarioEvento);
 	}	
 	
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
 		Evento eventoAtualizado = eventoRepositorio.findById(idEvento).orElse(null);
 		eventoAtualizado.setNome(evento.getNome());
 		eventoAtualizado.setEndereco(evento.getEndereco());
-		eventoAtualizado.setCategoria(evento.getCategoria());
+		eventoAtualizado.setIdSubCategoria(evento.getIdSubCategoria());
 		eventoAtualizado.setDataHoraInicio(evento.getDataHoraInicio());
 		return eventoRepositorio.save(eventoAtualizado);
 	}
 	
-	public Evento entrarEvento(Long idEvento, Usuario usuario) {
+	public Evento entrarEvento(Long idEvento, String apelido) {
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
+		Usuario usuario = usuarioRepositorio.findByApelido(apelido);
 		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
+		
 		usuarioEvento.setEvento(evento);
 		usuarioEvento.setUsuario(usuario);
 		usuarioEvento.setOrganizador(false);
@@ -110,6 +110,11 @@ public class EventoService {
 		
 		return evento;
 		
+	}
+
+	public List<Evento> buscarEventoPorSubCategoria(Long subcategoriaIdFk) {
+		List<Evento> eventos = eventoRepositorio.findByIdSubCategoria_idSubCategoria(subcategoriaIdFk);
+		return eventos;
 	}
 
 //	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {

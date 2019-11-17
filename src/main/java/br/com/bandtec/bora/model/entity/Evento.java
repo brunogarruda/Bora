@@ -14,11 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -56,10 +56,9 @@ public class Evento {
 	
 	private String senha;
 	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@NotEmpty
-	private Categoria categoria;
+	@ManyToOne
+	@JoinColumn(name="sub_categoria_id_fk", referencedColumnName = "id_sub_categoria")
+	private SubCategoria idSubCategoria;
 
 	@NotEmpty
 	@OneToOne
@@ -69,12 +68,13 @@ public class Evento {
 	@OneToOne
 	@JoinColumn(name="id_recorrencia")
 	private Recorrencia recorrencia;
-
+	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "organizador_id")
 	private Usuario organizador;
 	
+	@Transient
 	@OneToMany
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Usuario> participantes;
@@ -85,7 +85,7 @@ public class Evento {
 
 	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty String dataHoraInicio,
 			String dataHoraFim, @Size(max = 255) String descricao, boolean isPrivado, String senha,
-			@NotEmpty Categoria categoria, @NotEmpty Endereco endereco, Usuario organizador, Recorrencia recorrencia) {
+			@NotEmpty SubCategoria subcategoriaIdFk, @NotEmpty Endereco endereco, Usuario organizador, Recorrencia recorrencia) {
 		this.idEvento = idEvento;
 		this.nome = nome;
 		this.dataHoraInicio = dataHoraInicio;
@@ -93,7 +93,7 @@ public class Evento {
 		this.descricaoEvento = descricao;
 		this.isPrivado = isPrivado;
 		this.senha = senha;
-		this.categoria = categoria;
+		this.idSubCategoria = subcategoriaIdFk;
 		this.endereco = endereco;
 		this.organizador = organizador;
 		this.recorrencia = recorrencia;

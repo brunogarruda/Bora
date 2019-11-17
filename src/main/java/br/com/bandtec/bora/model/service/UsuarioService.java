@@ -42,9 +42,7 @@ public class UsuarioService {
 	public Usuario buscarUsuarioPeloIdUsuario(Long idUsuario) throws Exception {
 		Usuario usuario = usuarioRepositorio.findById(idUsuario).orElse(null);
 		
-		if (usuario == null) {
-			throw new Exception("Usuario Não Encontrado");
-		}
+		if (usuario != null) {
 		
 		List<UsuarioEvento> usuarioEvento = usuarioEventoRepositorio.findByUsuario_idUsuario(idUsuario);
 		List<Evento> eventos = new ArrayList<Evento>();
@@ -57,10 +55,11 @@ public class UsuarioService {
 			}
 		}
 		
-		if(eventos.isEmpty()) {
-			usuario.setEventosQueParticipo(null);
-		}else {
-			usuario.setEventosQueParticipo(eventos);
+			if(eventos.isEmpty()) {
+				usuario.setEventosQueParticipo(null);
+			}else{
+				usuario.setEventosQueParticipo(eventos);
+			}
 		}
 		 
 		return usuario;

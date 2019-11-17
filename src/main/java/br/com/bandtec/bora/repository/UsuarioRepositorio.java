@@ -6,8 +6,6 @@ import br.com.bandtec.bora.model.entity.Usuario;
 
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
-
-	Usuario findByIdUsuario(String usuario);
 	
 	Usuario findByApelido(String usuario); 
 	

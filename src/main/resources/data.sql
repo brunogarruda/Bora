@@ -1,12 +1,13 @@
+INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('teste','Teste',123456,'teste@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('bru','Bruno Arruda',123456,'bruno@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('thi','Thiago Jambeiro',123456,'thiago@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('gui','Guilherme Jesus',123456,'guilherme@email.com','123');
+INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('teste2','Teste',123456,'teste@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('will','William Sanches',123456,'william@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('biel','Gabriel ',123456,'gabriel@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('bia','Bratriz Accioli',123456,'bruno@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('admin','Admin123',123456,'admin@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('alex','Alex Barrera',123456,'barrera@email.com','123');
-INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('teste','Teste',123456,'teste@email.com','123');
 INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('chileno','chile',123456,'chile@email.com','123');
 
 INSERT INTO TBD_CATEGORIA (NOME_CATEGORIA) values ('Esportes');
@@ -22,30 +23,30 @@ INSERT INTO TBD_ENDERECO (BAIRRO, CEP, CIDADE, ESTADO, NUMERO, RUA) VALUES ('Ja�
 INSERT INTO TBD_ENDERECO (BAIRRO, CEP, CIDADE, ESTADO, NUMERO, RUA) VALUES ('Cerqueira Cesar', '05401-100','São Paulo', 'SP', '765', ' Av. Rebouças');
 
 
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Futebol',1);
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Volei',1);
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Tenis',1);
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Basquete',1);
 
-INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID) VALUES ('15/11/2019 10:00','15/11/2019 14:00','Somos uma equipe de 6 pessoas que marcamos a cada 15 dias para jogar. Estamos procurando outras pessoas para compartilhar esse mesmo hobbie que a gente. O valor é de 100,00 reais com tudo incluso por 4 horas',5,0,'PaintBall - Adrena Paintball',1,1);
-INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID) VALUES ('02/11/2019 23:00','03/11/2019 04:00', 'Está afim de sair para não ficar bem no feriado, venha com a gente. Vamos marcar no metro consolação as  22:00 caso queira encontrar a gente lá',3,0,'Open Bar na Venus',2,1);
-INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID) VALUES ('27/10/2019 15:00','27/10/2019 17:00','Estamos formando um futebol para todo sábado, pode participar a partir de 15 anos. Depois do futebol tem churrasco. Quadra R$30,00 | Churrasco(opcional) R$20,00',3,1,'FutShow - Quadra',1,3);
-INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID) VALUES ('22/10/2019 06:00','27/10/2019 08:00','Corrida e exercicios funcionais todos os dias. Venha ficar saudável com a gente.',4,0,'Corrida no Ibira',1,5);
-INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID) VALUES ('22/10/2019 20:00','2019-10-15 15:00','Minha primeira vez que vou nesse lugar e como cabem até 6 pessoas, então pensei em procurar outras pessoas que gostariam de ir pela primeira vez tbm. Até o momento são 2 pessoas confirmadas.',1,0,'Room Scape na Consolação',3,1);
-INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID) VALUES ('01/12/2019 20:00','02/12/2019 02:00','A galera da engenharia está organizando o terminando de mais um semestre da faculdade (O PENULTIMA). Então estamos organizando um balada na Blue Pub, a conta é por sua conta, apenas avise que está com a gente que a entrada é de graça.',2,0,'Festa de Despedida de Semestre - USP',2,4);
-INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID) VALUES ('05/12/2019 20:00','05/12/2019 22:00','Estamos organizando um kart tem mais 6 vagas. Por favor vir fantasiado',6,0,'Mario Kart - Kart Shopping Morumbi',1,2);
-INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID) VALUES ('30/12/2019 10:00','01/01/2020 20:00','Sitio Alugado para o final de ano',4,1,'Reveilon Topzera',1,4);
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Bloquinho',2);
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Festival',2);
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Balada',2);
+
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('RPG',3);
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Tabuleiro',3);
+INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , CATEGORIA_ID_FK ) values ('Games',3);
+
+INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , SUB_CATEGORIA_ID_FK , ORGANIZADOR_ID) VALUES ('15/11/2019 10:00','15/11/2019 14:00','Somos uma equipe de 6 pessoas que marcamos a cada 15 dias para jogar. Estamos procurando outras pessoas para compartilhar esse mesmo hobbie que a gente. O valor é de 100,00 reais com tudo incluso por 4 horas',5,0,'PaintBall - Adrena Paintball',1,1);
+INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , SUB_CATEGORIA_ID_FK , ORGANIZADOR_ID) VALUES ('02/11/2019 23:00','03/11/2019 04:00', 'Está afim de sair para não ficar bem no feriado, venha com a gente. Vamos marcar no metro consolação as  22:00 caso queira encontrar a gente lá',3,0,'Open Bar na Venus',2,1);
+INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , SUB_CATEGORIA_ID_FK , ORGANIZADOR_ID) VALUES ('27/10/2019 15:00','27/10/2019 17:00','Estamos formando um futebol para todo sábado, pode participar a partir de 15 anos. Depois do futebol tem churrasco. Quadra R$30,00 | Churrasco(opcional) R$20,00',3,1,'FutShow - Quadra',1,3);
+INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , SUB_CATEGORIA_ID_FK , ORGANIZADOR_ID) VALUES ('22/10/2019 06:00','27/10/2019 08:00','Corrida e exercicios funcionais todos os dias. Venha ficar saudável com a gente.',4,0,'Corrida no Ibira',1,5);
+INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , SUB_CATEGORIA_ID_FK , ORGANIZADOR_ID) VALUES ('22/10/2019 20:00','2019-10-15 15:00','Minha primeira vez que vou nesse lugar e como cabem até 6 pessoas, então pensei em procurar outras pessoas que gostariam de ir pela primeira vez tbm. Até o momento são 2 pessoas confirmadas.',1,0,'Room Scape na Consolação',3,1);
+INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , SUB_CATEGORIA_ID_FK , ORGANIZADOR_ID) VALUES ('01/12/2019 20:00','02/12/2019 02:00','A galera da engenharia está organizando o terminando de mais um semestre da faculdade (O PENULTIMA). Então estamos organizando um balada na Blue Pub, a conta é por sua conta, apenas avise que está com a gente que a entrada é de graça.',2,0,'Festa de Despedida de Semestre - USP',2,4);
+INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , SUB_CATEGORIA_ID_FK , ORGANIZADOR_ID) VALUES ('05/12/2019 20:00','05/12/2019 22:00','Estamos organizando um kart tem mais 6 vagas. Por favor vir fantasiado',6,0,'Mario Kart - Kart Shopping Morumbi',1,2);
+INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , SUB_CATEGORIA_ID_FK , ORGANIZADOR_ID) VALUES ('30/12/2019 10:00','01/01/2020 20:00','Sitio Alugado para o final de ano',4,1,'Reveilon Topzera',1,4);
 --INSERT INTO TBD_EVENTO ( DATA_HORA_INICIO , DATA_HORA_FIM , DESCRICAO , ID_ENDERECO , IS_PRIVADO , NOME_EVENTO , CATEGORIA_ID_CATEGORIA , ORGANIZADOR_ID , ID_RECORRENCIA ) VALUES ('30/12/2019 10:00','01/01/2020 20:00','Rolê do final de semana',1,0,'Bailinho',2,5,1);
 
 
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Futebol',1);
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Volei',1);
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Tenis',1);
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Basquete',1);
-
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Bloquinho',2);
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Festival',2);
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Balada',2);
-
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('RPG',3);
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Tabuleiro',3);
-INSERT INTO TBD_SUB_CATEGORIA ( NOME_SUB_CATEGORIA , ID_CATEGORIA ) values ('Games',3);
 
 
 INSERT INTO TBD_USUARIO_EVENTO(USUARIO_ID,EVENTO_ID,IS_ORGANIZADOR) VALUES(1,1,true);
@@ -67,6 +68,7 @@ INSERT INTO TBD_USUARIO_EVENTO(USUARIO_ID,EVENTO_ID,IS_ORGANIZADOR) VALUES(3,4,f
 INSERT INTO TBD_USUARIO_EVENTO(USUARIO_ID,EVENTO_ID,IS_ORGANIZADOR) VALUES(6,4,false);
 
 INSERT INTO TBD_USUARIO_EVENTO(USUARIO_ID,EVENTO_ID,IS_ORGANIZADOR) VALUES(3,2,false);
+INSERT INTO TBD_USUARIO_EVENTO(USUARIO_ID,EVENTO_ID,IS_ORGANIZADOR) VALUES(8,2,false);
 
 INSERT INTO TBD_RECORRENCIA (DIA_EVENTO,TIPO_RECORRENCIA) VALUES('Todos os dias','diário');
 INSERT INTO TBD_RECORRENCIA (DIA_EVENTO,TIPO_RECORRENCIA) VALUES('segunda-feira','semanal');
