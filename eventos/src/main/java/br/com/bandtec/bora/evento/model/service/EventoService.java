@@ -7,6 +7,7 @@ import br.com.bandtec.bora.evento.model.dto.ParticiparEvento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ import javax.transaction.Transactional;
 public class EventoService {
     private final EventoRepositorio repositorio;
     private final UsuarioEventoRepositorio usuarioEventoRepositorio;
+    private final MongoOperations operations;
+
 
     public Iterable<Evento> buscarEventos(Pageable pageable) throws Exception {
         log.info("Listing all eventos");
@@ -45,6 +48,7 @@ public class EventoService {
     @Transactional
     public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
         Evento evento = new Evento(cadastrarEvento.getTitulo(), cadastrarEvento.getDescricao(), cadastrarEvento.getEndereco(), cadastrarEvento.getCategoria(), cadastrarEvento.getUsuario().getIdUsuario());
+        operations.save(evento);
         repositorio.save(evento);
     }
 

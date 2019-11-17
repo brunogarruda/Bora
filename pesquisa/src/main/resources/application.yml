@@ -1,0 +1,17 @@
+server:
+    port: 8085
+
+eureka:
+    instance:
+        prefer-ip-address: true
+    client:
+        service-url:
+            defaultZone: http://35.238.241.13:8761/eureka/
+        register-with-eureka: true
+
+spring:
+    application:
+        name: pesquisa
+    data:
+        mongodb:
+            uri: mongodb://127.0.0.1:27017
