@@ -34,7 +34,6 @@ public class EventoService {
 		return eventoRepositorio.findForHome(new PageRequest(0, 8));
 	}
 	
-	@Transactional
 	public void cadastrarEvento(CadastrarEventoDTO cadastrarEvento) {
 		Usuario usuario = usuarioRepositorio.findById(cadastrarEvento.getUsuario().getIdUsuario()).orElse(null);
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
@@ -73,6 +72,13 @@ public class EventoService {
 		usuarioEvento.setOrganizador(false);
 		usuarioEventoRepositorio.save(usuarioEvento);
 		return evento;
+	}
+	
+	public void sairEvento(Long idEvento, String apelido) {
+		Usuario usuario = usuarioRepositorio.findByApelido(apelido);
+		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
+		UsuarioEvento usuarioEvento = usuarioEventoRepositorio.buscaPorUsuarioEventoPeloIdUsuarioIdEvento(usuario.getIdUsuario(), evento.getIdEvento());
+		usuarioEventoRepositorio.deleteById(usuarioEvento.getId());
 	}
 	
 	public List<Evento> buscarTodosEventos(Evento evento) {

@@ -12,10 +12,10 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/categoria")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CategoriaController {
 
-	private final CategoriaService categoriaService;
+	@Autowired
+	private CategoriaService categoriaService;
 	
 	@GetMapping
 	public ResponseEntity<List<Categoria>> buscarTodasCategorias() throws Exception{
