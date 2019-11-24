@@ -16,6 +16,8 @@ import br.com.bandtec.bora.model.entity.UsuarioEvento;
 import br.com.bandtec.bora.repository.EventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioRepositorio;
+import util.Fila;
+import util.GravaArquivo;
 
 @Service
 public class EventoService {
@@ -29,6 +31,8 @@ public class EventoService {
 	@Autowired
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
 	
+	private Fila fila = new Fila(100);
+	
 	
 	public List<Evento> buscarEventosHome(){
 		return eventoRepositorio.findForHome(new PageRequest(0, 8));
@@ -36,6 +40,7 @@ public class EventoService {
 	
 	@Transactional
 	public void cadastrarEvento(CadastrarEventoDTO cadastrarEvento) {
+		
 		Usuario usuario = usuarioRepositorio.findById(cadastrarEvento.getUsuario().getIdUsuario()).orElse(null);
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		Evento evento = new Evento();
@@ -49,7 +54,10 @@ public class EventoService {
 		usuarioEvento.setEvento(evento);
 		usuarioEvento.setUsuario(usuario);
 		usuarioEvento.setOrganizador(true);
-		usuarioEventoRepositorio.save(usuarioEvento);
+		
+		fila.insert(usuarioEvento);
+		
+		usuarioEventoRepositorio.save(fila.poll());
 	}	
 	
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
@@ -60,6 +68,7 @@ public class EventoService {
 		eventoAtualizado.setDataHoraFim(evento.getDataHoraFim() != null ? evento.getDataHoraFim() : eventoAtualizado.getDataHoraFim());
 		eventoAtualizado.setEndereco(evento.getEndereco() != null ? evento.getEndereco() : eventoAtualizado.getEndereco());
 		eventoAtualizado.setIdSubCategoria(evento.getIdSubCategoria() != null ? evento.getIdSubCategoria() : eventoAtualizado.getIdSubCategoria());
+		GravaArquivo.gravaArquivo(eventoAtualizado);
 		return eventoRepositorio.save(eventoAtualizado);
 	}
 	
