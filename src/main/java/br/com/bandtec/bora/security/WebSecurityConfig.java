@@ -43,21 +43,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.POST, "/api/auth").permitAll()
 		.antMatchers(HttpMethod.GET, "/swagger-ui").permitAll()
 		.antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
-		.antMatchers(HttpMethod.GET, "/v2/api-docs/**").permitAll()
-	    .antMatchers(HttpMethod.GET, "/swagger.json").permitAll()
-	    .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
-	    .antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
-	    .antMatchers(HttpMethod.GET, "/webjars/**").permitAll()
 		
 		.antMatchers(HttpMethod.GET, "/api/eventos/**").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/eventos/**").permitAll()
 		.antMatchers(HttpMethod.PUT, "/api/eventos/**").permitAll()
 		
-		.antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/usuarios/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/usuarios/**").permitAll()
 		
-		.antMatchers(HttpMethod.GET, "/api/categoria").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/participantes").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/categoria/**").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/sub-categoria/**").permitAll()
 		
 		.anyRequest().authenticated()
 		.and().csrf().disable()

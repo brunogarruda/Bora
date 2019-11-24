@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import br.com.bandtec.bora.model.enums.AvaliacaoEnum;
 import lombok.Data;
 
 @Entity
@@ -72,6 +73,8 @@ public class Evento {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "organizador_id")
 	private Usuario organizador;
+
+	private AvaliacaoEnum avaliacao;
 	
 	@Transient
 	@OneToMany

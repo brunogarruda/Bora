@@ -12,7 +12,7 @@ import br.com.bandtec.bora.model.entity.SubCategoria;
 import br.com.bandtec.bora.model.service.SubCategoriaService;
 
 @RestController
-@RequestMapping("/api/sub=categoria")
+@RequestMapping("/api/sub-categoria")
 public class SubCategoriaController {
 	
 	@Autowired

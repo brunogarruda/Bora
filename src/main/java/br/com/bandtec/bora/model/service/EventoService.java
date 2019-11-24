@@ -13,6 +13,7 @@ import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
+import br.com.bandtec.bora.model.enums.AvaliacaoEnum;
 import br.com.bandtec.bora.repository.EventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioRepositorio;
@@ -80,6 +81,31 @@ public class EventoService {
 		UsuarioEvento usuarioEvento = usuarioEventoRepositorio.buscaPorUsuarioEventoPeloIdUsuarioIdEvento(usuario.getIdUsuario(), evento.getIdEvento());
 		usuarioEventoRepositorio.deleteById(usuarioEvento.getId());
 	}
+
+	public void avaliarEvento(Long idEvento, AvaliacaoEnum nota) {
+		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
+
+		switch (nota) {
+            case ESTRELA1:
+                evento.setAvaliacao(nota);
+                break;
+            case ESTRELA2:
+				evento.setAvaliacao(nota);
+                break;
+            case ESTRELA3:
+                evento.setAvaliacao(nota);
+				break;
+			case ESTRELA4:
+                evento.setAvaliacao(nota);
+				break;
+			case ESTRELA5:
+                evento.setAvaliacao(nota);
+                break;
+            default:
+                evento.setAvaliacao(AvaliacaoEnum.ESTRELA0);
+		}
+		eventoRepositorio.save(evento);
+	}
 	
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
@@ -102,6 +128,7 @@ public class EventoService {
 		List<UsuarioEvento> usuarioEvento = usuarioEventoRepositorio.findByEvento_idEvento(idEvento);
 		List<Usuario> participantes = new ArrayList<Usuario>();
 		
+		//trazendo os participantes do evento
 		for(int i = 0; i<usuarioEvento.size(); i++) {
 			Usuario usuario = usuarioEvento.get(i).getUsuario();
 			
