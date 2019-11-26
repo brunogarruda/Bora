@@ -15,7 +15,7 @@ public interface UsuarioEventoRepositorio extends JpaRepository<UsuarioEvento, L
 
 	List<UsuarioEvento> findByEvento_idEvento(Long idEvento);
 	
-	@Query(value = "select * from tbd_usuario_evento where usuario_id = :idUsuario and evento_id = :idEvento;", nativeQuery = true)
+	@Query(value = "select * from tbd_usuario_evento where usuario_id = :idUsuario and evento_id = :idEvento ;", nativeQuery = true)
 	UsuarioEvento buscaPorUsuarioEventoPeloIdUsuarioIdEvento(@Param("idUsuario") Long idUsuario, @Param("idEvento") Long idEvento);
 
 }

@@ -14,6 +14,7 @@ import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
 import br.com.bandtec.bora.model.enums.AvaliacaoEnum;
+import br.com.bandtec.bora.model.form.ApelidoForm;
 import br.com.bandtec.bora.repository.EventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioRepositorio;
@@ -75,8 +76,8 @@ public class EventoService {
 		return evento;
 	}
 	
-	public void sairEvento(Long idEvento, String apelido) {
-		Usuario usuario = usuarioRepositorio.findByApelido(apelido);
+	public void sairEvento(Long idEvento, ApelidoForm apelido) {
+		Usuario usuario = usuarioRepositorio.findByApelido(apelido.getApelido());
 		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
 		UsuarioEvento usuarioEvento = usuarioEventoRepositorio.buscaPorUsuarioEventoPeloIdUsuarioIdEvento(usuario.getIdUsuario(), evento.getIdEvento());
 		usuarioEventoRepositorio.deleteById(usuarioEvento.getId());

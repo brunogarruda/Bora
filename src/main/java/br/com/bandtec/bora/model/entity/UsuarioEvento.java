@@ -29,7 +29,7 @@ public class UsuarioEvento {
 	@JsonIgnoreProperties
 	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "evento_id")
 	@JsonIgnoreProperties
 	private Evento evento;
