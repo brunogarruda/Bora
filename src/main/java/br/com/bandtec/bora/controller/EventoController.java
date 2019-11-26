@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.enums.AvaliacaoEnum;
+import br.com.bandtec.bora.model.form.ApelidoForm;
 import br.com.bandtec.bora.model.service.EventoService;
 
 @RestController
@@ -53,8 +55,8 @@ public class EventoController {
 		return ResponseEntity.ok(eventoService.entrarEvento(idEvento, apelido));
 	}
 
-	@PutMapping("/sair/{idEvento}")
-	public ResponseEntity<?> sairEvento(@PathVariable(value = "idEvento") Long idEvento,@RequestBody Usuario apelido) {
+	@DeleteMapping("/sair/{idEvento}")
+	public ResponseEntity<?> sairEvento(@PathVariable(value = "idEvento") Long idEvento,@RequestBody ApelidoForm apelido) {
 		eventoService.sairEvento(idEvento, apelido);
 		return ResponseEntity.ok().build();
 	}
