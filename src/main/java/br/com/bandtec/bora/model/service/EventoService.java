@@ -75,35 +75,46 @@ public class EventoService {
 		return evento;
 	}
 	
-	public void sairEvento(Long idEvento, String apelido) {
-		Usuario usuario = usuarioRepositorio.findByApelido(apelido);
-		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
-		UsuarioEvento usuarioEvento = usuarioEventoRepositorio.buscaPorUsuarioEventoPeloIdUsuarioIdEvento(usuario.getIdUsuario(), evento.getIdEvento());
-		usuarioEventoRepositorio.deleteById(usuarioEvento.getId());
+	public void sairEvento(Long idEvento, Usuario apelido) {
+		try {
+			Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
+			Usuario usuario = usuarioRepositorio.findByApelido(apelido.getApelido());
+			if (usuario == null) {
+				System.out.println("usuario é nulo");
+			}
+			UsuarioEvento usuarioEvento = usuarioEventoRepositorio.buscaPorUsuarioEventoPeloIdUsuarioIdEvento(usuario.getIdUsuario(), evento.getIdEvento());
+			usuarioEventoRepositorio.deleteById(usuarioEvento.getId());
+		} catch (Exception e) {
+			e.getCause();
+		}
+		return;
 	}
 
 	public void avaliarEvento(Long idEvento, AvaliacaoEnum nota) {
 		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
+		double media = evento.getAvaliacao();
 
 		switch (nota) {
             case ESTRELA1:
-                evento.setAvaliacao(nota);
+                media += 1;
                 break;
             case ESTRELA2:
-				evento.setAvaliacao(nota);
+				media += 2;
                 break;
             case ESTRELA3:
-                evento.setAvaliacao(nota);
+                media += 3;
 				break;
 			case ESTRELA4:
-                evento.setAvaliacao(nota);
+                media += 4;
 				break;
 			case ESTRELA5:
-                evento.setAvaliacao(nota);
+                media += 5;
                 break;
             default:
-                evento.setAvaliacao(AvaliacaoEnum.ESTRELA0);
+                media += 0;
 		}
+		
+		evento.setAvaliacao(media/2);
 		eventoRepositorio.save(evento);
 	}
 	

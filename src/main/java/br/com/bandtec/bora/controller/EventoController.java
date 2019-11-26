@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
+import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.enums.AvaliacaoEnum;
 import br.com.bandtec.bora.model.service.EventoService;
 
@@ -53,7 +54,7 @@ public class EventoController {
 	}
 
 	@PutMapping("/sair/{idEvento}")
-	public ResponseEntity<?> sairEvento(@PathVariable(value = "idEvento") Long idEvento,@RequestBody String apelido) {
+	public ResponseEntity<?> sairEvento(@PathVariable(value = "idEvento") Long idEvento,@RequestBody Usuario apelido) {
 		eventoService.sairEvento(idEvento, apelido);
 		return ResponseEntity.ok().build();
 	}
