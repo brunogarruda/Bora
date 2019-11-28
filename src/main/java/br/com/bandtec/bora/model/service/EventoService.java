@@ -31,16 +31,17 @@ public class EventoService {
 	@Autowired
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
 	
-	private Fila fila = new Fila(100);
-	
-	
 	public List<Evento> buscarEventosHome(){
-		return eventoRepositorio.findForHome(new PageRequest(0, 8));
+		Evento[] arrayEventos = eventoRepositorio.findForHome();
+		List<Evento> listaEventos = new ArrayList<Evento>();
+		convertArrayToList(arrayEventos, listaEventos,0);
+		
+		return listaEventos;
 	}
 	
 	@Transactional
 	public void cadastrarEvento(CadastrarEventoDTO cadastrarEvento) {
-		
+		Fila fila = new Fila(10);
 		Usuario usuario = usuarioRepositorio.findById(cadastrarEvento.getUsuario().getIdUsuario()).orElse(null);
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		Evento evento = new Evento();
@@ -124,8 +125,18 @@ public class EventoService {
 	}
 
 	public List<Evento> buscarEventoPorSubCategoria(Long subcategoriaIdFk) {
-		List<Evento> eventos = eventoRepositorio.findByIdSubCategoria_idSubCategoria(subcategoriaIdFk);
-		return eventos;
+		List<Evento> lista= eventoRepositorio.findByIdSubCategoria_idSubCategoria(subcategoriaIdFk);
+		return lista;
+	}
+	
+	public void convertArrayToList(Evento[] array, List<Evento> lista, int tamanho) {
+		if (tamanho == 6 || tamanho == array.length) {  
+			return;
+		}
+		else {
+			lista.add(array[tamanho]);
+			convertArrayToList(array,lista,tamanho+1);
+		}
 	}
 
 //	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {

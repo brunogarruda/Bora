@@ -17,7 +17,7 @@ public class GravaArquivo {
 		boolean error = false;
 		String nomeArquivo;
 
-		nomeArquivo = "Acessos.txt";
+		nomeArquivo = "i.txt";
 
 		try {
 			arq = new FileWriter(nomeArquivo, true);

@@ -66,6 +66,8 @@ public class EventoController {
 		return ResponseEntity.ok(eventoService.buscarEventoPorSubCategoria(subcategoriaIdFk));
 	}
 	
+	
+	
 
 //	@GetMapping("/{usuario}")
 //	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
