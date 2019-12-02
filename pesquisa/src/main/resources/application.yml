@@ -14,4 +14,6 @@ spring:
         name: pesquisa
     data:
         mongodb:
-            uri: mongodb://127.0.0.1:27017/bora-db
+              uri: mongodb+srv://SVN7V:futebol1996santos@jesusdb-csczi.azure.mongodb.net/test?retryWrites=true&w=majority
+            # uri: mongodb://127.0.0.1:27017/bora-db
+
