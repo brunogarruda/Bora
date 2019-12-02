@@ -74,6 +74,7 @@ public class Evento {
 	@JoinColumn(name = "organizador_id")
 	private Usuario organizador;
 
+	@Transient
 	private double avaliacao;
 	
 	@Transient
