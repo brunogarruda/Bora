@@ -30,8 +30,10 @@ public class GravaArquivo {
 		try {
 			String header = header(evento);
 			String body = body(evento);
-			saida.format("%s;%n",header);
-			saida.format("%s;%n",body);
+			String trailer = trailer(evento);
+			saida.format("%s%n",header);
+			saida.format("%s%n",body);
+			saida.format("%s%n",body);
 					
 		} catch (FormatterClosedException erro) {
 			System.err.println("Erro ao gravar no arquivo.");
@@ -53,28 +55,29 @@ public class GravaArquivo {
 	public static String header(Evento evento) {
 
 		String id = String.format("%05d", evento.getIdEvento());
-		return "AlteracaoDeEvento" + id + DateTime.now().toString("dd/MM/yyyy HH:mm:ss");
+		return "00" + "AlteracaoDeEvento" + id + DateTime.now().toString("dd/MM/yyyy HH:mm:ss");
 	}
 	
 	public static String body(Evento evento) {
 		
 		String privado = evento.isPrivado() ? "1" : "0";
 
-		return  String.format("%30.30s", evento.getNome())
+		return  "01"
+				+String.format("%30.30s", evento.getNome())
 				+String.format("%16.16s", evento.getDataHoraInicio())
 				+String.format("%16.16s", evento.getDataHoraFim())
 				+String.format("%60.60s", evento.getDescricaoEvento())
 				+privado
-				+String.format("%30.30s", evento.getEndereco().getRua())
-				+String.format("%5.5s", evento.getEndereco().getNumero())
-				+String.format("%20.20s", evento.getEndereco().getBairro())
-				+String.format("%9.9s", evento.getEndereco().getCep())
-				+String.format("%20.20s", evento.getEndereco().getCidade())
-				+String.format("%20.20s", evento.getEndereco().getEstado());
+				+String.format("%-30.30s", evento.getEndereco().getRua())
+				+String.format("%-5.5s", evento.getEndereco().getNumero())
+				+String.format("%-20.20s", evento.getEndereco().getBairro())
+				+String.format("%-9.9s", evento.getEndereco().getCep())
+				+String.format("%-20.20s", evento.getEndereco().getCidade())
+				+String.format("%-20.20s", evento.getEndereco().getEstado());
 	}
 	
-	public static String Trailer(Evento evento) {
-		return "a";
+	public static String trailer(Evento evento) {
+		return "03";
 	}
 
 }
