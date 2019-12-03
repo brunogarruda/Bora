@@ -1,5 +1,7 @@
 package br.com.bandtec.bora.controller;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
+import br.com.bandtec.bora.model.dto.EventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.enums.AvaliacaoEnum;
@@ -35,9 +38,15 @@ public class EventoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<CadastrarEventoDTO> cadastrarEvento(@RequestBody CadastrarEventoDTO cadastrarEvento) {
-		eventoService.cadastrarEvento(cadastrarEvento);
-		return ResponseEntity.ok().build();
+	public ResponseEntity<CadastrarEventoDTO> cadastrarEvento(@RequestBody Evento evento,@RequestBody ApelidoForm apelido) throws URISyntaxException {
+		 
+		Evento result = eventoService.cadastrarEvento(evento, apelido);
+		
+		if (result.getIdEvento() == null) {
+	            return ResponseEntity.badRequest().body(null);
+	        }
+		
+		return ResponseEntity.created(new URI("/api/eventos/"+result.getIdEvento())).build();
 	}
 	
 	@GetMapping
@@ -46,7 +55,7 @@ public class EventoController {
 	}
 	
 	@GetMapping("/{idEvento}")
-	public ResponseEntity<Evento> buscarEventoPorIdEvento(@PathVariable(value = "idEvento") Long idEvento) throws Exception {
+	public ResponseEntity<EventoDTO> buscarEventoPorIdEvento(@PathVariable(value = "idEvento") Long idEvento) throws Exception {
 		return ResponseEntity.ok(eventoService.buscarEventoPorIdEvento(idEvento));
 	}
 
@@ -63,8 +72,12 @@ public class EventoController {
 
 	@PostMapping("/avaliar/{idEvento}")
 	public ResponseEntity<?> avaliarEvento(@PathVariable(value = "idEvento") Long idEvento,@RequestBody AvaliacaoEnum nota) {
-		eventoService.avaliarEvento(idEvento, nota);
-		return ResponseEntity.ok().build();
+		
+		if(idEvento != null ) {
+			eventoService.avaliarEvento(idEvento, nota);
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.badRequest().body(null);
 	}
 	
 	@PutMapping("/{idEvento}")

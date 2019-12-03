@@ -7,9 +7,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
+import br.com.bandtec.bora.model.dto.EventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
@@ -36,21 +38,18 @@ public class EventoService {
 		return eventoRepositorio.findForHome(new PageRequest(0, 8));
 	}
 	
-	public void cadastrarEvento(CadastrarEventoDTO cadastrarEvento) {
-		Usuario usuario = usuarioRepositorio.findById(cadastrarEvento.getUsuario().getIdUsuario()).orElse(null);
-		UsuarioEvento usuarioEvento = new UsuarioEvento();
-		Evento evento = new Evento();
+	public Evento cadastrarEvento(Evento evento, ApelidoForm apelido) {
+		Usuario usuario = usuarioRepositorio.findByApelido(apelido.getApelido());
 		
-		evento.setIdSubCategoria(cadastrarEvento.getEvento().getIdSubCategoria());
-		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
-		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
-		evento.setNome(cadastrarEvento.getEvento().getNome());
-		evento.setOrganizador(usuario);
-
+		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		usuarioEvento.setEvento(evento);
-		usuarioEvento.setUsuario(usuario);
 		usuarioEvento.setOrganizador(true);
+		usuarioEvento.setUsuario(usuario);
+		
 		usuarioEventoRepositorio.save(usuarioEvento);
+		eventoRepositorio.save(evento);
+
+		return evento;
 	}	
 	
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
@@ -83,8 +82,11 @@ public class EventoService {
 		usuarioEventoRepositorio.deleteById(usuarioEvento.getId());
 	}
 
-	public void avaliarEvento(Long idEvento, AvaliacaoEnum nota) {
+	public Evento avaliarEvento(Long idEvento, AvaliacaoEnum nota) {
 		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
+		
+		if (evento != null) {
+		
 		double media = evento.getAvaliacao();
 
 		switch (nota) {
@@ -109,6 +111,8 @@ public class EventoService {
 		
 		evento.setAvaliacao(media/2);
 		eventoRepositorio.save(evento);
+		}
+		return evento;
 	}
 	
 	public List<Evento> buscarTodosEventos(Evento evento) {
@@ -123,7 +127,7 @@ public class EventoService {
 		return eventos;
 	}
 	
-	public Evento buscarEventoPorIdEvento(Long idEvento) throws Exception {
+	public EventoDTO buscarEventoPorIdEvento(Long idEvento) throws Exception {
 		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
 		if (evento == null) {
 			throw new Exception("Evento não encontrado");
@@ -147,12 +151,18 @@ public class EventoService {
 			evento.setParticipantes(participantes);
 		}
 		
-		return evento;
+		EventoDTO eventoDTO = new EventoDTO(evento.getIdEvento(), evento.getNome(), evento.getDataHoraInicio(), evento.getDataHoraFim(), 
+				evento.getDescricaoEvento(), evento.getSenha(), evento.getIdSubCategoria().getIdSubCategoria(), evento.getEndereco(), evento.getRecorrencia(), 
+				evento.getOrganizador().getApelido(), evento.getAvaliacao(), evento.getParticipantes());
+		
+		
+		return eventoDTO;
 		
 	}
 
 	public List<Evento> buscarEventoPorSubCategoria(Long subcategoriaIdFk) {
 		List<Evento> eventos = eventoRepositorio.findByIdSubCategoria_idSubCategoria(subcategoriaIdFk);
+		
 		return eventos;
 	}
 
