@@ -14,6 +14,7 @@ spring:
         name: pesquisa
     data:
         mongodb:
-              uri: mongodb+srv://SVN7V:futebol1996santos@jesusdb-csczi.azure.mongodb.net/test?retryWrites=true&w=majority
-            # uri: mongodb://127.0.0.1:27017/bora-db
+            uri: mongodb://SVN7V:futebol1996santos@jesusdb-shard-00-00-csczi.azure.mongodb.net:27017,jesusdb-shard-00-01-csczi.azure.mongodb.net:27017,jesusdb-shard-00-02-csczi.azure.mongodb.net:27017/test?ssl=true&replicaSet=JesusDB-shard-0&authSource=admin&retryWrites=true&w=majority
+#              uri: mongodb+srv://SVN7V:futebol1996santos@jesusdb-csczi.azure.mongodb.net/test?retryWrites=true&w=majority
+#             uri: mongodb://127.0.0.1:27017/bora-db
 

@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EntityScan(basePackages = { "br.com.bandtec.bora.core.model" })
 @EnableJpaRepositories(basePackages = { "br.com.bandtec.bora.core.repository" })
-@EnableMongoRepositories(basePackages = {"br.com.bandtec.bora.core.repository"})
+@EnableMongoRepositories("br.com.bandtec.bora.core.repository")
 @ComponentScan(basePackages = { "br.com.bandtec.bora" })
 @EnableEurekaClient
 @EnableCaching

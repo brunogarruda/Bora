@@ -8,17 +8,18 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 import javax.persistence.Id;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(value = "pesquisa-engine")
+@Document(value = "searchEngine")
 public class Pesquisa {
     @Id
     public ObjectId _id;
+
+    private Long idEvento;
 
    @Indexed(name = "titulo")
    @TextIndexed

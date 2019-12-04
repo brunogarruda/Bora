@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 
 @Service
@@ -19,14 +20,6 @@ public class UserAuthenticationService {
     private final UsuarioRepositorio repositorio;
     private final TokenService service;
 
-//    public Usuario authenticate(LoginForm dados, String token){
-//        Usuario usuario = repositorio.findByApelido(dados.getApelido()).orElseThrow(ExistingApelidoException::new);
-//        if(dados.getSenha().equals(usuario.getSenha())&&!token.isEmpty() && validate(token))
-//            return usuario;
-//        else {
-//            return null;
-//        }
-//    }
 
     public String criaTokenLogin(LoginForm loginForm){
         Usuario usuario = repositorio.validaLoginESenha(loginForm.getApelido(),loginForm.getSenha());

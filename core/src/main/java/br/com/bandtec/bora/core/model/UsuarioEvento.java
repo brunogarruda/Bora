@@ -1,11 +1,12 @@
 package br.com.bandtec.bora.core.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
-
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tbd_participantes")
@@ -17,8 +18,8 @@ public class UsuarioEvento {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @JoinColumn(name = "participante_id")
+    private Usuario participante;
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ManyToOne
@@ -27,6 +28,15 @@ public class UsuarioEvento {
 
     public UsuarioEvento(Long idEvento,Long idUsuario){
         this.evento = new Evento(idEvento);
-        this.usuario = new Usuario(idUsuario);
+        this.participante = new Usuario(idUsuario);
+    }
+
+    public UsuarioEvento(Long idEvento, String apelido) {
+        this.evento = new Evento(idEvento);
+        this.participante=new Usuario(apelido);
+    }
+
+    public UsuarioEvento(String apelido){
+        this.participante = new Usuario(apelido);
     }
 }

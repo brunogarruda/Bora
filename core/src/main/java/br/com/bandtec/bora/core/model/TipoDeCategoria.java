@@ -1,15 +1,10 @@
 package br.com.bandtec.bora.core.model;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
+
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,10 +15,12 @@ public class TipoDeCategoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_tipo_categoria")
     private Long idTipoCategoria;
 
     private String nome;
 
-    @OneToMany(mappedBy = "tipoDeCategoria")
-    private List<Categoria> categoria;
+    @ManyToOne
+    @JoinColumn(name = "fk_icone_id")
+    private ImageModel icone;
 }

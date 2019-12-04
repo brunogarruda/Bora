@@ -8,7 +8,9 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -19,8 +21,10 @@ public class PesquisaService {
     public List<Pesquisa> busca(String text){
         TextQuery textQuery = TextQuery.queryText(new TextCriteria().matchingAny(text));
         List<Pesquisa> result = operations.find(textQuery,Pesquisa.class,"pesquisa-engine");
-        if(result.isEmpty())
-            return repositorio.searchEngine(text);
+        Optional<List<Pesquisa>> pesquisa = Optional.empty();
+
+        if(result.isEmpty()) pesquisa = repositorio.searchEngine(text);
+        if(pesquisa.isPresent())repositorio.findAll();
         return result;
     }
 }

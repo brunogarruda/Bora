@@ -1,7 +1,6 @@
 package br.com.bandtec.bora.core.docs;
 
 import org.springframework.context.annotation.Bean;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;

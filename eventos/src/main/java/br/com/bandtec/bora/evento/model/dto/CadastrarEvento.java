@@ -1,6 +1,5 @@
 package br.com.bandtec.bora.evento.model.dto;
 
-import br.com.bandtec.bora.core.model.Categoria;
 import br.com.bandtec.bora.core.model.Evento;
 import br.com.bandtec.bora.core.model.Usuario;
 import lombok.AllArgsConstructor;
@@ -16,15 +15,19 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class CadastrarEvento {
 
+    private Long idEvento;
     @NotEmpty(message = "{titulo.not.empty}")
     private String titulo;
     private String descricao;
-    private String endereco;
-    private Categoria categoria;
+    private String rua;
+    private String numero;
+    private String cep;
+    private String bairro;
+    private Double latitude;
+    private Double longitude;
     private Usuario usuario;
 
     public Evento cadastrar(){
-        return new Evento(titulo,descricao,endereco,categoria.getIdCategoria(),usuario.getIdUsuario());
+        return new Evento(titulo,rua,numero,cep,bairro,latitude,longitude,usuario.getIdUsuario());
     }
-
 }

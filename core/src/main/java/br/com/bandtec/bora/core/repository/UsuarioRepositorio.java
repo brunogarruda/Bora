@@ -16,4 +16,5 @@ public interface UsuarioRepositorio extends PagingAndSortingRepository<Usuario, 
     public Usuario validaLoginESenha(@Param("apelido") String apelido, @Param("senha") String senha);
 
 
+
 }
