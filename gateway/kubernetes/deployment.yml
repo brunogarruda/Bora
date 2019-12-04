@@ -16,4 +16,4 @@ spec:
                 - name: gateway
                   image: gesuvs/gateway:gateway
                   ports:
-                      -   containerPort: 8080
+                      -   containerPort: 8761

@@ -14,6 +14,6 @@ spec:
         spec:
             containers:
                 - name: discovery
-                  image: gesuvs/bora-discovery:discovery
+                  image: gesuvs/discovery:discovery
                   ports:
-                      -   containerPort: 8761
+                      -   containerPort: 8081

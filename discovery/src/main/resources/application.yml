@@ -3,11 +3,11 @@ spring:
         name: registry
 
 server:
-    port: 8081
+    port: 8761
 
 eureka:
     client:
         register-with-eureka: false
         fetch-registry: false
         service-url:
-            defaultZone: http://localhost:8081/eureka/
+            defaultZone: http://34.66.21.206:8761/eureka/
